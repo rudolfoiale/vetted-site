@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vetted — Physician-Reviewed Wellness Audits</title>
+<meta name="description" content="A physician-reviewed audit of your supplement stack or skincare routine. No products sold. No algorithm. Just an honest assessment from a real doctor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0f172a;--dark:#1e293b;--gray:#64748b;--light-gray:#f1f5f9;--white:#ffffff;--teal:#14b8a6;--teal-dark:#0d9488;--teal-light:#ccfbf1;--text:#334155;--border:#e2e8f0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:var(--text);line-height:1.7;background:var(--white)}
+h1,h2,h3,h4{font-family:'Playfair Display','Inter',serif;color:var(--navy);line-height:1.2}
+a{color:var(--teal-dark);text-decoration:none}
+
+/* Header */
+.header{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:100;padding:0.75rem 0}
+.header-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--navy);font-weight:700}
+.header-cta{background:var(--teal);color:white;padding:0.5rem 1.25rem;border-radius:6px;font-weight:600;font-size:0.875rem;transition:background 0.2s}
+.header-cta:hover{background:var(--teal-dark);color:white}
+
+/* Sections */
+section{padding:5rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{text-transform:uppercase;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--teal-dark);margin-bottom:0.75rem}
+
+/* Hero */
+.hero{padding:8rem 1.5rem 5rem;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:white;text-align:center}
+.hero h1{color:white;font-size:clamp(2rem,5vw,3.5rem);max-width:800px;margin:0 auto 1.5rem}
+.hero p{color:#94a3b8;font-size:1.125rem;max-width:650px;margin:0 auto 2.5rem;line-height:1.8}
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:white;padding:0.875rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;display:inline-block;transition:all 0.2s;border:2px solid var(--teal)}
+.btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark);color:white;transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:white;padding:0.875rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;display:inline-block;border:2px solid #475569;transition:all 0.2s}
+.btn-secondary:hover{border-color:#94a3b8;color:white}
+.trust-bar{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:3rem;padding-top:2rem;border-top:1px solid #334155}
+.trust-item{color:#94a3b8;font-size:0.8rem;font-weight:500}
+
+/* Problem */
+.problem{background:var(--white)}
+.problem h2{font-size:clamp(1.75rem,3.5vw,2.5rem);margin-bottom:2rem}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2.5rem}
+.problem-card{padding:2rem;border:1px solid var(--border);border-radius:12px;background:var(--white)}
+.problem-card h3{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;color:var(--navy)}
+.problem-card p{font-size:0.95rem;color:var(--gray)}
+
+/* How it works */
+.how{background:var(--light-gray)}
+.how h2{font-size:clamp(1.75rem,3.5vw,2.5rem);text-align:center;margin-bottom:3rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+.step{text-align:center;padding:2.5rem 2rem;background:var(--white);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:3rem;height:3rem;background:var(--teal-light);color:var(--teal-dark);font-weight:800;border-radius:50%;margin-bottom:1.25rem;font-size:1.125rem}
+.step h3{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:0.75rem}
+.step p{font-size:0.95rem;color:var(--gray)}
+
+/* Verticals */
+.vertical{border-bottom:1px solid var(--border)}
+.vertical:last-of-type{border-bottom:none}
+.vertical-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.vertical h2{font-size:clamp(1.5rem,3vw,2.25rem);margin-bottom:1rem}
+.vertical p{margin-bottom:1.5rem;color:var(--gray)}
+.vertical ul{list-style:none;margin-bottom:2rem}
+.vertical li{padding:0.5rem 0;padding-left:1.75rem;position:relative;font-size:0.95rem}
+.vertical li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:700}
+.example-box{background:var(--light-gray);border-radius:12px;padding:2rem}
+.example-box h4{font-family:'Inter',sans-serif;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray);margin-bottom:1rem}
+.example-item{padding:0.75rem 0;border-bottom:1px solid var(--border);font-size:0.9rem}
+.example-item:last-child{border-bottom:none}
+.example-item strong{color:var(--navy)}
+
+/* Pricing */
+.pricing{background:var(--navy);color:white;text-align:center}
+.pricing h2{color:white;font-size:clamp(1.75rem,3.5vw,2.5rem);margin-bottom:0.75rem}
+.pricing>p,.pricing .container>p{color:#94a3b8;margin-bottom:3rem}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:0 auto 3rem}
+.price-card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:2.5rem 2rem;text-align:center}
+.price-card.featured{border-color:var(--teal);position:relative}
+.price-card.featured::before{content:"BEST VALUE";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;font-size:0.7rem;font-weight:700;padding:0.25rem 1rem;border-radius:20px;letter-spacing:0.05em}
+.price-card h3{font-family:'Inter',sans-serif;color:white;font-size:1rem;font-weight:600;margin-bottom:0.5rem}
+.price-amount{font-size:3rem;font-weight:800;color:white;margin:1rem 0}
+.price-amount span{font-size:1rem;color:#94a3b8;font-weight:400}
+.price-desc{color:#94a3b8;font-size:0.875rem;margin-bottom:1.5rem;min-height:3rem}
+.price-card .btn-primary{width:100%;text-align:center;padding:0.75rem}
+.price-card .btn-outline{width:100%;text-align:center;padding:0.75rem;border:2px solid #475569;color:white;border-radius:8px;font-weight:600;display:block;transition:all 0.2s}
+.price-card .btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.sub-box{max-width:600px;margin:0 auto;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:2rem;text-align:center}
+.sub-box h3{font-family:'Inter',sans-serif;color:white;font-size:1.1rem;margin-bottom:0.5rem}
+.sub-box p{color:#94a3b8;font-size:0.9rem}
+
+/* Trust */
+.trust{background:var(--white)}
+.trust h2{font-size:clamp(1.75rem,3.5vw,2.5rem);margin-bottom:2.5rem}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.trust-card h3{font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:var(--navy)}
+.trust-card p{font-size:0.9rem;color:var(--gray)}
+
+/* FAQ */
+.faq{background:var(--light-gray)}
+.faq h2{font-size:clamp(1.75rem,3.5vw,2.5rem);text-align:center;margin-bottom:2.5rem}
+.faq-list{max-width:750px;margin:0 auto}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:8px;margin-bottom:0.75rem;overflow:hidden}
+.faq-q{padding:1.25rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--navy);font-size:0.95rem}
+.faq-q::after{content:"+";font-size:1.25rem;font-weight:400;color:var(--gray);transition:transform 0.2s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:0 1.5rem 1.25rem;font-size:0.9rem;color:var(--gray);display:none;line-height:1.8}
+.faq-item.open .faq-a{display:block}
+
+/* Final CTA */
+.final-cta{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:white;text-align:center;padding:5rem 1.5rem}
+.final-cta h2{color:white;font-size:clamp(1.75rem,3.5vw,2.5rem);max-width:700px;margin:0 auto 1.5rem}
+.final-cta p{color:#94a3b8;max-width:600px;margin:0 auto 2.5rem;font-size:1.05rem}
+.final-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* Footer */
+footer{background:var(--navy);color:#64748b;padding:2.5rem 1.5rem;text-align:center;font-size:0.8rem;border-top:1px solid #1e293b}
+footer a{color:#94a3b8}
+footer p{margin-bottom:0.5rem}
+
+/* Mobile */
+@media(max-width:768px){
+  .vertical-inner{grid-template-columns:1fr;gap:2rem}
+  .trust-bar{flex-direction:column;align-items:center;gap:0.75rem}
+  section{padding:3.5rem 1.25rem}
+  .hero{padding:7rem 1.25rem 3.5rem}
+}
+
+/* Animations */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+<div class="header-inner">
+<div class="logo">Vetted</div>
+<a href="#pricing" class="header-cta">Get Your Audit</a>
+</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+<div class="container">
+<h1>A physician looked at your supplement stack. Here's what they found.</h1>
+<p>Vetted delivers a physician-reviewed audit of your supplement routine or skincare regimen — in plain English, within 48 hours. No appointment. No upsell. Just an honest assessment from a doctor who has no products to sell you.</p>
+<div class="hero-ctas">
+<a href="#pricing" class="btn-primary">Get Your Audit — $97</a>
+<a href="#how" class="btn-secondary">See How It Works</a>
+</div>
+<div class="trust-bar">
+<span class="trust-item">🩺 Reviewed by licensed physicians</span>
+<span class="trust-item">🚫 Brand-agnostic — we sell nothing</span>
+<span class="trust-item">⏱ 48-hour turnaround</span>
+<span class="trust-item">🔒 HIPAA-compliant</span>
+</div>
+</div>
+</section>
+
+<!-- Problem -->
+<section class="problem">
+<div class="container">
+<div class="section-label">The Problem</div>
+<h2>You've been doing your own research. So has everyone else.</h2>
+<p>You're not anti-science. You've read the studies. You've listened to the podcasts. You've spent real money on real products — and you're still not entirely sure what you're doing is right.</p>
+<div class="problem-grid fade-in">
+<div class="problem-card">
+<h3>You're probably wasting money.</h3>
+<p>The average supplement user spends $200–$400/month. A physician would cut that stack by 30–40% on day one. Redundant ingredients, underdosed formulas, overpriced "proprietary blends" — you're paying for marketing, not outcomes.</p>
+</div>
+<div class="problem-card">
+<h3>You might be creating dangerous interactions.</h3>
+<p>If you're on any prescription medications, there's a real chance some of what you're taking is interacting with it. Ashwagandha and SSRIs, high-dose omega-3 and blood thinners, zinc and copper depletion. These are documented clinical interactions.</p>
+</div>
+<div class="problem-card">
+<h3>Your skincare routine is fighting itself.</h3>
+<p>AHAs and retinoids at the same time can destroy your barrier. Physical scrubs plus active acids is double exfoliation. Your 7-step routine might be a 3-step routine with 4 expensive mistakes added on.</p>
+</div>
+<div class="problem-card">
+<h3>Nobody is reviewing any of it.</h3>
+<p>Your doctor has 12 minutes with you. Your dermatologist has a 6-week wait. The influencer selling you their stack has a financial stake. Nobody has sat down with your complete routine and said: "Here's what to keep and what to cut."</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- How It Works -->
+<section class="how" id="how">
+<div class="container">
+<div class="section-label" style="text-align:center">How It Works</div>
+<h2>Three steps. 48 hours. A physician with nothing to sell you.</h2>
+<div class="steps fade-in">
+<div class="step">
+<div class="step-num">1</div>
+<h3>Submit Your Routine</h3>
+<p>Fill out our intake form — about 10 minutes. List every supplement or skincare product, your health goals, and current medications. The more detail, the better your audit.</p>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<h3>A Physician Reviews It</h3>
+<p>Not an algorithm. Not a quiz. A licensed physician or board-certified dermatologist reads your intake, cross-references interactions, and writes a personalized report.</p>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<h3>You Get Your Audit</h3>
+<p>Within 48 hours: what to keep, what to cut, what's missing, what to watch out for. Every recommendation explained in plain language with reasoning behind it.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Supplement Vertical -->
+<section class="vertical" id="supplements">
+<div class="container">
+<div class="vertical-inner fade-in">
+<div>
+<div class="section-label">Supplement Stack Audit</div>
+<h2>Finally know if your stack is working — or working against you.</h2>
+<p>You've been stacking supplements based on Reddit threads, podcast recommendations, and what was on sale at Costco. It's time a physician looked at all of it together.</p>
+<ul>
+<li>Drug-supplement interaction check</li>
+<li>Redundancy analysis — are you paying for the same thing three times?</li>
+<li>Dosage review — clinically relevant or just label-compliant?</li>
+<li>Personalized keep / cut / add recommendations</li>
+<li>Physician sign-off with explanations you can understand</li>
+</ul>
+<a href="#pricing" class="btn-primary">Get Your Supplement Audit — $97</a>
+</div>
+<div class="example-box">
+<h4>Real examples of what we catch</h4>
+<div class="example-item"><strong>10mg melatonin nightly</strong> — causing receptor downregulation. 0.3–1mg is evidence-based; higher doses often make sleep worse.</div>
+<div class="example-item"><strong>BCAAs + adequate protein</strong> — redundant. You're paying for expensive amino acids you're already getting from food.</div>
+<div class="example-item"><strong>St. John's Wort + SSRIs</strong> — serotonin syndrome risk. Most people don't know this interaction exists.</div>
+<div class="example-item"><strong>Magnesium Oxide vs. Glycinate</strong> — 4% absorption vs 80%+. You're paying to do nothing.</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Skincare Vertical -->
+<section class="vertical" id="skincare" style="background:var(--light-gray)">
+<div class="container">
+<div class="vertical-inner fade-in">
+<div class="example-box" style="background:var(--white)">
+<h4>Real examples of what we catch</h4>
+<div class="example-item"><strong>Physical scrub + AHA + retinoid</strong> — barrier destruction. Extremely common in "advanced" routines.</div>
+<div class="example-item"><strong>Vitamin C + retinoid same routine</strong> — unnecessary irritation. They belong in AM/PM, not together.</div>
+<div class="example-item"><strong>No SPF</strong> — the single most evidence-backed anti-aging intervention, skipped entirely.</div>
+<div class="example-item"><strong>8-product acne routine</strong> — that doesn't include a single ingredient targeting the actual cause of the acne.</div>
+</div>
+<div>
+<div class="section-label">Skincare Routine Audit</div>
+<h2>A dermatologist reviewed your routine. You should see what she found.</h2>
+<p>You're spending $150–$400 a month on skincare. But you might be layering products in the wrong order, using two things that cancel each other out, or damaging your skin barrier with a routine that's technically impressive but clinically counterproductive.</p>
+<ul>
+<li>Full routine analysis: AM and PM, every product</li>
+<li>Ingredient compatibility check — what works together, what doesn't</li>
+<li>Layering order correction — sequence matters more than you think</li>
+<li>Product swap recommendations at budget, mid, and premium tiers</li>
+<li>Dermatologist sign-off explaining the "why" behind each change</li>
+</ul>
+<a href="#pricing" class="btn-primary">Get Your Skincare Audit — $97</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+<div class="container">
+<div class="section-label" style="text-align:center;color:var(--teal)">Pricing</div>
+<h2>Simple pricing. No subscription traps.</h2>
+<p style="color:#94a3b8;margin-bottom:3rem">One-time audits. Cancel anytime subscriptions. No products sold. Ever.</p>
+<div class="pricing-grid fade-in">
+<div class="price-card">
+<h3>Supplement Audit</h3>
+<div class="price-amount">$97</div>
+<p class="price-desc">Full stack review + interaction check + physician report</p>
+<a href="#get-started" class="btn-outline">Get Supplement Audit</a>
+</div>
+<div class="price-card featured">
+<h3>Bundle: Both Audits</h3>
+<div class="price-amount">$149 <span>(save $45)</span></div>
+<p class="price-desc">Both audits from both physicians — supplements + skincare</p>
+<a href="#get-started" class="btn-primary">Get Both Audits</a>
+</div>
+<div class="price-card">
+<h3>Skincare Audit</h3>
+<div class="price-amount">$97</div>
+<p class="price-desc">Full routine review + compatibility check + derm report</p>
+<a href="#get-started" class="btn-outline">Get Skincare Audit</a>
+</div>
+</div>
+<div class="sub-box fade-in">
+<h3>Quarterly Re-Audit — $39/month</h3>
+<p>Re-audit every 3 months as your routine changes. Submit updates anytime. Email access for follow-up questions. Priority queue. Cancel anytime.</p>
+</div>
+</div>
+</section>
+
+<!-- Trust -->
+<section class="trust">
+<div class="container">
+<div class="section-label">Why Vetted</div>
+<h2>Why Vetted is different.</h2>
+<div class="trust-grid fade-in">
+<div class="trust-card">
+<h3>We have actual physicians.</h3>
+<p>Not an algorithm. A family medicine physician and a board-certified dermatologist — people who spent a decade in medical training and see patients in clinical practice — reviewing your routine.</p>
+</div>
+<div class="trust-card">
+<h3>We have nothing to sell you.</h3>
+<p>Every supplement service that exists is also a supplement company. Their advice is filtered through a sales motive. We don't sell products. We never will. Our only job is giving you an honest assessment.</p>
+</div>
+<div class="trust-card">
+<h3>We're brand-agnostic.</h3>
+<p>If what you're taking is good, we'll say keep it. If the cheap version at Costco works just as well, you'll find out. No kickbacks, no affiliate codes, no incentive.</p>
+</div>
+<div class="trust-card">
+<h3>We work within our scope.</h3>
+<p>We're not your doctor. These audits are wellness education — what a knowledgeable physician would tell a close friend. If something requires medical attention, we'll tell you that too.</p>
+</div>
+<div class="trust-card">
+<h3>HIPAA-compliant infrastructure.</h3>
+<p>Your health information is stored securely, shared only with the reviewing physician, and never sold to third parties. Ever.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+<div class="container">
+<div class="section-label" style="text-align:center">FAQ</div>
+<h2>Frequently Asked Questions</h2>
+<div class="faq-list">
+<div class="faq-item"><div class="faq-q">Is this medical advice?</div><div class="faq-a">No — and that's important. This is wellness education. Think of it as what a knowledgeable physician friend would tell you over coffee after looking at your routine. It does not establish a doctor-patient relationship and does not replace care from your own healthcare provider.</div></div>
+<div class="faq-item"><div class="faq-q">Who reviews my audit?</div><div class="faq-a">Supplement audits are reviewed by a licensed family medicine physician. Skincare audits are reviewed by a board-certified dermatologist. These are real practitioners who see patients in clinical practice — not algorithm outputs.</div></div>
+<div class="faq-item"><div class="faq-q">How long does it take?</div><div class="faq-a">Standard turnaround is 48 hours from when you submit your completed intake form. Quarterly subscribers get priority queue status.</div></div>
+<div class="faq-item"><div class="faq-q">What exactly do I get?</div><div class="faq-a">A written report. For supplements: interaction check, redundancy analysis, dosage review, and keep/cut/add recommendations. For skincare: full routine analysis, ingredient compatibility check, layering order correction, and product recommendations at three price tiers.</div></div>
+<div class="faq-item"><div class="faq-q">Do I need a complex routine already?</div><div class="faq-a">No. Some of our most useful audits are for people just starting out. "I'm thinking about starting a supplement stack — what should I actually take?" is a totally valid use case.</div></div>
+<div class="faq-item"><div class="faq-q">What if I'm on prescription medications?</div><div class="faq-a">Please list them on the intake form. This is one of the most important reasons to get a physician review. If your medications require clinical evaluation beyond a wellness audit, we'll tell you and recommend the right type of provider.</div></div>
+<div class="faq-item"><div class="faq-q">Is this HIPAA-compliant?</div><div class="faq-a">Yes. Your health intake is stored on HIPAA-compliant infrastructure, shared only with the reviewing physician, and never sold or used for marketing.</div></div>
+<div class="faq-item"><div class="faq-q">Can you prescribe anything?</div><div class="faq-a">No. This is not a telemedicine service. If your situation calls for a prescription, we'll tell you and recommend the appropriate next step.</div></div>
+<div class="faq-item"><div class="faq-q">What if I disagree with the recommendations?</div><div class="faq-a">That's fine. You'll get the reasoning behind every suggestion so you can evaluate it yourself. Quarterly subscribers can reach us by email for follow-up questions.</div></div>
+<div class="faq-item"><div class="faq-q">Can I get a refund?</div><div class="faq-a">If we can't complete your audit on our end, full refund. Because audits involve physician time, completed audits aren't eligible — but if you're genuinely dissatisfied, contact us and we'll make it right.</div></div>
+</div>
+</div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+<div class="container">
+<h2>You've been doing your own research long enough. Let us check your work.</h2>
+<p>A physician will read your entire routine — and tell you what's working, what isn't, and what they'd change if you were their patient.</p>
+<div class="final-ctas">
+<a href="#get-started" class="btn-primary">Get My Supplement Audit — $97</a>
+<a href="#get-started" class="btn-primary">Get My Skincare Audit — $97</a>
+<a href="#get-started" class="btn-secondary">Bundle Both — $149</a>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#94a3b8;margin-bottom:1rem">Vetted</p>
+<p>Questions? <a href="mailto:hello@vettedhealth.com">hello@vettedhealth.com</a></p>
+<p style="margin-top:1rem;font-size:0.75rem;max-width:700px;margin-left:auto;margin-right:auto">Vetted provides wellness education and personalized routine guidance reviewed by licensed physicians. This service does not constitute medical advice, diagnosis, or treatment, and does not establish a doctor-patient relationship. Always consult your personal healthcare provider before making changes to medications, supplements, or treatments.</p>
+<p style="margin-top:1rem">© 2026 Vetted. All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')})});
+// Fade-in on scroll
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
