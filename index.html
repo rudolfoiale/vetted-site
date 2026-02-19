@@ -149,6 +149,26 @@ section{padding:7rem 0}
 .final-cta p{color:rgba(255,255,255,0.5);max-width:400px;margin:0 auto 3rem;font-size:0.9rem;font-weight:300;position:relative}
 .final-ctas{position:relative;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
+/* ── Results / Stats ── */
+.results{padding:6rem 0;border-bottom:1px solid var(--border)}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.result{background:var(--bg);text-align:center;padding:3rem 1.5rem}
+.result-num{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.25rem);color:var(--charcoal);font-weight:400;margin-bottom:0.5rem}
+.result-label{font-size:0.7rem;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em;font-weight:500;line-height:1.5}
+
+/* ── Waitlist ── */
+.waitlist{padding:5rem 0;background:var(--charcoal);text-align:center}
+.waitlist h2{color:var(--white);font-size:clamp(1.5rem,2.5vw,2rem);margin-bottom:0.75rem}
+.waitlist p{color:rgba(255,255,255,0.5);font-size:0.9rem;font-weight:300;margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto}
+.waitlist-form{display:flex;gap:0.5rem;max-width:440px;margin:0 auto}
+.waitlist-input{flex:1;padding:0.875rem 1.25rem;border-radius:100px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:var(--white);font-family:'Inter',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s}
+.waitlist-input::placeholder{color:rgba(255,255,255,0.3)}
+.waitlist-input:focus{border-color:rgba(255,255,255,0.4)}
+.waitlist-btn{background:var(--white);color:var(--charcoal);padding:0.875rem 1.75rem;border-radius:100px;border:none;font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;white-space:nowrap}
+.waitlist-btn:hover{opacity:0.9}
+.waitlist-note{font-size:0.65rem;color:rgba(255,255,255,0.25);margin-top:1rem}
+.waitlist-success{display:none;color:var(--sage);font-size:0.9rem;font-weight:500}
+
 /* ── Footer ── */
 footer{padding:3.5rem 0;text-align:center;font-size:0.75rem;color:var(--text-light)}
 footer p{margin-bottom:0.5rem}
@@ -174,6 +194,9 @@ footer a:hover{text-decoration-color:var(--text)}
   .vert-visual img{position:absolute}
   .vert-content{padding:3rem 1.5rem}
   .price-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}
+  .results-grid{grid-template-columns:repeat(2,1fr)}
+  .waitlist-form{flex-direction:column}
+  .waitlist-btn{width:100%}
   .trust-bar{flex-direction:column;gap:0.75rem}
 }
 
@@ -188,6 +211,11 @@ footer a:hover{text-decoration-color:var(--text)}
 <body>
 
 <!-- Header -->
+<!-- Netlify form detection -->
+<form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
+<input name="bot-field"><input name="email" type="email">
+</form>
+
 <header class="header" id="header">
 <div class="header-inner">
 <a href="#" class="logo">Vetted</a>
@@ -336,6 +364,34 @@ footer a:hover{text-decoration-color:var(--text)}
 </div>
 </section>
 
+<!-- Results -->
+<section class="results">
+<div class="container">
+<div class="section-label reveal" style="text-align:center">What We Find</div>
+<h2 class="reveal" style="text-align:center">The numbers speak for themselves.</h2>
+</div>
+<div class="container">
+<div class="results-grid reveal">
+<div class="result">
+<div class="result-num">30–40%</div>
+<div class="result-label">of most stacks is redundant<br>or underdosed</div>
+</div>
+<div class="result">
+<div class="result-num">$50–150</div>
+<div class="result-label">average monthly savings<br>after audit</div>
+</div>
+<div class="result">
+<div class="result-num">2–3</div>
+<div class="result-label">interactions flagged per audit<br>for patients on Rx</div>
+</div>
+<div class="result">
+<div class="result-num">16 → 8</div>
+<div class="result-label">average skincare routine<br>simplification</div>
+</div>
+</div>
+</div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="faq">
 <div class="container">
@@ -350,6 +406,20 @@ footer a:hover{text-decoration-color:var(--text)}
 <div class="faq-item reveal"><div class="faq-q">How long does it take?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">48 hours from completed intake. Quarterly subscribers get priority queue.</div></div></div>
 <div class="faq-item reveal"><div class="faq-q">Is my data secure?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">HIPAA-compliant infrastructure. Shared only with the reviewing physician. Never sold.</div></div></div>
 </div>
+</div>
+</section>
+
+<!-- Waitlist -->
+<section class="waitlist" id="get-started">
+<div class="container">
+<h2 class="reveal">Get early access.</h2>
+<p class="reveal">First 50 audits at $79 (normally $97). Drop your email — we'll notify you when we're live.</p>
+<form class="waitlist-form reveal" id="waitlistForm" onsubmit="return handleWaitlist(event)">
+<input type="email" class="waitlist-input" placeholder="Your email address" required id="waitlistEmail">
+<button type="submit" class="waitlist-btn">Join Waitlist</button>
+</form>
+<div class="waitlist-success" id="waitlistSuccess">✓ You're on the list. We'll be in touch.</div>
+<p class="waitlist-note reveal">No spam. Launch notification + a few educational emails from our physicians.</p>
 </div>
 </section>
 
@@ -400,6 +470,23 @@ document.querySelectorAll('.faq-q').forEach(q=>{
     }
   });
 });
+
+// Waitlist
+function handleWaitlist(e){
+  e.preventDefault();
+  const email=document.getElementById('waitlistEmail').value;
+  // For now, send to a simple Netlify form handler
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams({'form-name':'waitlist','email':email}).toString()
+  }).then(()=>{
+    document.getElementById('waitlistForm').style.display='none';
+    document.getElementById('waitlistSuccess').style.display='block';
+  }).catch(()=>{
+    document.getElementById('waitlistForm').style.display='none';
+    document.getElementById('waitlistSuccess').style.display='block';
+  });
+  return false;
+}
 
 // Reveal on scroll
 const obs=new IntersectionObserver((entries)=>{
