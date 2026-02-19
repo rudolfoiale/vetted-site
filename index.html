@@ -33,7 +33,8 @@ section{padding:6rem 0}
 .btn-outline:hover{border-color:var(--charcoal)}
 
 /* Hero */
-.hero{padding:10rem 0 6rem;text-align:center}
+.hero{padding:10rem 0 0;text-align:center}
+.hero-img{width:100%;height:400px;object-fit:cover;margin-top:5rem;filter:brightness(0.95) saturate(0.85)}
 .hero h1{font-size:clamp(2.25rem,5vw,3.75rem);max-width:700px;margin:0 auto 1.5rem;letter-spacing:-0.02em}
 .hero p{color:var(--text);font-size:1.05rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.8}
 .hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
@@ -62,6 +63,7 @@ section{padding:6rem 0}
 .vert ul{list-style:none;margin-bottom:2rem}
 .vert li{padding:0.4rem 0;padding-left:1.25rem;position:relative;font-size:0.9rem;color:var(--text)}
 .vert li::before{content:"—";position:absolute;left:0;color:var(--sage)}
+.vert-img{width:100%;height:300px;object-fit:cover;border-radius:8px;filter:brightness(0.95) saturate(0.8);margin-bottom:1.5rem}
 .examples{padding:2rem;background:var(--bg-alt);border-radius:8px}
 .examples h4{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--light);margin-bottom:1.25rem}
 .ex{padding:0.6rem 0;font-size:0.85rem;color:var(--text);border-bottom:1px solid var(--border)}
@@ -115,7 +117,9 @@ footer a{text-decoration:underline;text-underline-offset:2px}
   .price-grid{grid-template-columns:1fr;max-width:320px}
   .trust-bar{flex-direction:column;gap:0.5rem}
   section{padding:4rem 0}
-  .hero{padding:8rem 0 4rem}
+  .hero{padding:8rem 0 0}
+  .hero-img{height:250px}
+  .vert-img{height:200px}
 }
 
 /* Fade */
@@ -147,6 +151,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 <span class="trust-item">HIPAA-Compliant</span>
 </div>
 </div>
+<img class="hero-img" src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=1200&q=80&auto=format&fit=crop" alt="Premium wellness products on marble surface">
 </section>
 
 <section class="how" id="how">
@@ -177,6 +182,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 
 <div class="vert fade">
 <div>
+<img class="vert-img" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80&auto=format&fit=crop" alt="Supplement capsules">
 <div class="vert-label">Supplement Stack Audit</div>
 <h2>Know if your stack is working — or working against you.</h2>
 <p>A family medicine physician reviews your entire supplement routine against clinical evidence and your current medications.</p>
@@ -199,6 +205,7 @@ footer a{text-decoration:underline;text-underline-offset:2px}
 
 <div class="vert fade">
 <div>
+<img class="vert-img" src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80&auto=format&fit=crop" alt="Skincare products collection">
 <div class="vert-label">Skincare Routine Audit</div>
 <h2>A dermatologist reviewed your routine. See what she found.</h2>
 <p>A board-certified dermatologist analyzes your full AM/PM routine for compatibility, layering order, and ingredient conflicts.</p>
