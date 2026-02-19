@@ -6,294 +6,406 @@
 <title>Vetted — Physician-Reviewed Wellness Audits</title>
 <meta name="description" content="A physician-reviewed audit of your supplement stack or skincare routine. Brand-agnostic. Evidence-based. 48-hour turnaround.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#FAFAF8;--bg-alt:#F3F2EF;--charcoal:#2D2D2D;--text:#555;--light:#888;--sage:#7C8B7E;--sage-light:#E8ECE9;--black:#1A1A1A;--white:#fff;--border:#E5E3DF}
+:root{
+  --bg:#FAFAF8;
+  --bg-alt:#F4F3F0;
+  --charcoal:#1D1D1F;
+  --text:#6B6B6B;
+  --text-light:#999;
+  --sage:#8B9A8D;
+  --sage-dark:#6B7D6E;
+  --black:#111;
+  --white:#fff;
+  --cream:#F8F7F4;
+  --border:#E8E6E1;
+  --border-light:#F0EEEA;
+}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--text);line-height:1.7;background:var(--bg);font-size:16px;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--charcoal);line-height:1.25;font-weight:500}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.75;background:var(--bg);font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--charcoal);font-weight:400;line-height:1.2}
 a{color:inherit;text-decoration:none}
+img{display:block;width:100%}
 
-/* Layout */
-.container{max-width:1000px;margin:0 auto;padding:0 2rem}
-section{padding:6rem 0}
+/* Grain overlay */
+body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
 
-/* Header */
-.header{position:fixed;top:0;width:100%;background:rgba(250,250,248,0.9);backdrop-filter:blur(12px);z-index:100;padding:1rem 0;border-bottom:1px solid var(--border)}
-.header-inner{max-width:1000px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--charcoal);font-weight:600;letter-spacing:-0.01em}
-.header-cta{background:var(--black);color:var(--white);padding:0.5rem 1.5rem;border-radius:100px;font-size:0.8rem;font-weight:500;transition:opacity 0.2s}
-.header-cta:hover{opacity:0.8}
+.container{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+section{padding:7rem 0}
 
-/* Buttons */
-.btn{display:inline-block;background:var(--black);color:var(--white);padding:0.875rem 2.25rem;border-radius:100px;font-size:0.875rem;font-weight:500;letter-spacing:0.01em;transition:opacity 0.2s}
-.btn:hover{opacity:0.8;color:var(--white)}
-.btn-outline{display:inline-block;background:transparent;color:var(--charcoal);padding:0.875rem 2.25rem;border-radius:100px;font-size:0.875rem;font-weight:500;border:1px solid var(--border);transition:all 0.2s}
-.btn-outline:hover{border-color:var(--charcoal)}
+/* ── Header ── */
+.header{position:fixed;top:0;width:100%;z-index:100;padding:0;transition:all 0.4s}
+.header.scrolled{background:rgba(250,250,248,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-light)}
+.header-inner{max-width:1080px;margin:0 auto;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--charcoal);font-weight:500;letter-spacing:-0.02em}
+.header .logo{transition:color 0.3s}
+.header:not(.scrolled) .logo{color:var(--white)}
+.header-nav{display:flex;gap:2.5rem;align-items:center}
+.header-link{font-size:0.75rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-light);transition:color 0.2s}
+.header-link:hover{color:var(--charcoal)}
+.header:not(.scrolled) .header-link{color:rgba(255,255,255,0.6)}
+.header:not(.scrolled) .header-link:hover{color:var(--white)}
+.header-cta{background:var(--charcoal);color:var(--white);padding:0.55rem 1.5rem;border-radius:100px;font-size:0.75rem;font-weight:500;letter-spacing:0.04em;transition:all 0.3s}
+.header-cta:hover{background:var(--black);color:var(--white)}
+.header:not(.scrolled) .header-cta{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}
+.header:not(.scrolled) .header-cta:hover{background:rgba(255,255,255,0.25)}
 
-/* Hero */
-.hero{padding:10rem 0 0;text-align:center}
-.hero-img{width:100%;height:400px;object-fit:cover;margin-top:5rem;filter:brightness(0.95) saturate(0.85)}
-.hero h1{font-size:clamp(2.25rem,5vw,3.75rem);max-width:700px;margin:0 auto 1.5rem;letter-spacing:-0.02em}
-.hero p{color:var(--text);font-size:1.05rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.8}
+/* ── Buttons ── */
+.btn{display:inline-block;background:var(--charcoal);color:var(--white);padding:1rem 2.5rem;border-radius:100px;font-size:0.8rem;font-weight:500;letter-spacing:0.03em;transition:all 0.3s;border:1px solid var(--charcoal)}
+.btn:hover{background:var(--black);border-color:var(--black);color:var(--white);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.btn-outline{display:inline-block;background:transparent;color:var(--charcoal);padding:1rem 2.5rem;border-radius:100px;font-size:0.8rem;font-weight:500;letter-spacing:0.03em;border:1px solid var(--border);transition:all 0.3s}
+.btn-outline:hover{border-color:var(--charcoal);transform:translateY(-1px)}
+.btn-white{display:inline-block;background:var(--white);color:var(--charcoal);padding:1rem 2.5rem;border-radius:100px;font-size:0.8rem;font-weight:500;letter-spacing:0.03em;transition:all 0.3s}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.15);color:var(--charcoal)}
+
+/* ── Hero ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:0}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;filter:saturate(0.6) brightness(0.35)}
+.hero-content{position:relative;z-index:2;padding:2.5rem;max-width:750px}
+.hero h1{color:var(--white);font-size:clamp(2.5rem,5.5vw,4.25rem);letter-spacing:-0.03em;margin-bottom:1.5rem;font-weight:400}
+.hero h1 em{font-style:italic}
+.hero p{color:rgba(255,255,255,0.6);font-size:1rem;max-width:480px;margin:0 auto 3rem;font-weight:300;line-height:1.9;letter-spacing:0.01em}
 .hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.trust-bar{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:4rem}
-.trust-item{color:var(--light);font-size:0.75rem;font-weight:500;letter-spacing:0.03em;text-transform:uppercase}
+.trust-bar{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;margin-top:5rem}
+.trust-item{color:rgba(255,255,255,0.35);font-size:0.65rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
 
-/* Divider */
-.divider{width:40px;height:1px;background:var(--border);margin:0 auto 2rem}
+/* ── Marquee / Social Proof ── */
+.proof{padding:3.5rem 0;border-bottom:1px solid var(--border);text-align:center}
+.proof p{font-size:0.8rem;color:var(--text-light);font-weight:400;letter-spacing:0.02em}
+.proof span{color:var(--charcoal);font-weight:500}
 
-/* How */
-.how{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.how h2{text-align:center;font-size:clamp(1.5rem,3vw,2.25rem);margin-bottom:3.5rem}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
-.step{text-align:center}
-.step-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--sage);margin-bottom:1rem;font-style:italic}
-.step h3{font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.04em}
-.step p{font-size:0.9rem;color:var(--text);max-width:280px;margin:0 auto}
+/* ── How ── */
+.how{padding:8rem 0;border-bottom:1px solid var(--border)}
+.how .section-label{text-align:center}
+.how h2{text-align:center;font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:1rem;letter-spacing:-0.02em}
+.how .section-sub{text-align:center;color:var(--text);font-size:0.9rem;max-width:460px;margin:0 auto 4rem;font-weight:300}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.step{text-align:center;padding:3rem 2.5rem;background:var(--bg)}
+.step-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--sage);margin-bottom:1.5rem;font-style:italic;font-weight:400}
+.step h3{font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;color:var(--charcoal);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.1em}
+.step p{font-size:0.85rem;color:var(--text);max-width:260px;margin:0 auto;font-weight:300;line-height:1.8}
 
-/* Verticals */
-.verticals{padding:6rem 0}
-.vert{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid var(--border)}
-.vert:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.vert-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--sage);margin-bottom:0.75rem}
-.vert h2{font-size:clamp(1.5rem,2.5vw,2rem);margin-bottom:1rem}
-.vert p{margin-bottom:1.5rem;font-size:0.95rem}
-.vert ul{list-style:none;margin-bottom:2rem}
-.vert li{padding:0.4rem 0;padding-left:1.25rem;position:relative;font-size:0.9rem;color:var(--text)}
-.vert li::before{content:"—";position:absolute;left:0;color:var(--sage)}
-.vert-img{width:100%;height:300px;object-fit:cover;border-radius:8px;filter:brightness(0.95) saturate(0.8);margin-bottom:1.5rem}
-.examples{padding:2rem;background:var(--bg-alt);border-radius:8px}
-.examples h4{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--light);margin-bottom:1.25rem}
-.ex{padding:0.6rem 0;font-size:0.85rem;color:var(--text);border-bottom:1px solid var(--border)}
-.ex:last-child{border-bottom:none}
-.ex strong{color:var(--charcoal);font-weight:600}
+/* ── Section Labels ── */
+.section-label{font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;color:var(--sage);margin-bottom:1.5rem}
 
-/* Pricing */
-.pricing{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
-.pricing h2{font-size:clamp(1.5rem,3vw,2.25rem);margin-bottom:0.75rem}
-.pricing>div>p{color:var(--light);margin-bottom:3rem;font-size:0.9rem}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:820px;margin:0 auto 3rem}
-.price-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:2.5rem 1.75rem;text-align:center;position:relative;transition:border-color 0.2s}
-.price-card:hover{border-color:var(--charcoal)}
+/* ── Verticals ── */
+.verticals{padding:0}
+.vert{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+.vert-content{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.vert-visual{position:relative;overflow:hidden}
+.vert-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(0.7) brightness(0.95);transition:transform 6s ease}
+.vert:hover .vert-visual img{transform:scale(1.03)}
+.vert h2{font-size:clamp(1.5rem,2.5vw,2.15rem);margin-bottom:1rem;letter-spacing:-0.02em}
+.vert p{margin-bottom:2rem;font-size:0.9rem;font-weight:300;line-height:1.9}
+.vert ul{list-style:none;margin-bottom:2.5rem}
+.vert li{padding:0.5rem 0;padding-left:1.5rem;position:relative;font-size:0.85rem;color:var(--text);font-weight:400}
+.vert li::before{content:"";position:absolute;left:0;top:0.95rem;width:6px;height:1px;background:var(--sage)}
+.vert-examples{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border)}
+.vert-examples h4{font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-light);margin-bottom:1rem}
+.ex{padding:0.5rem 0;font-size:0.8rem;color:var(--text);font-weight:300}
+.ex strong{color:var(--charcoal);font-weight:500}
+
+/* ── Pricing ── */
+.pricing{padding:8rem 0;text-align:center;background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pricing h2{font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:0.75rem;letter-spacing:-0.02em}
+.pricing .section-sub{color:var(--text-light);margin-bottom:4rem;font-size:0.9rem;font-weight:300}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:880px;margin:0 auto 3.5rem}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:3rem 2rem;text-align:center;position:relative;transition:all 0.3s}
+.price-card:hover{border-color:var(--charcoal);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.06)}
 .price-card.featured{border-color:var(--charcoal)}
-.price-card.featured::before{content:"Best value";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--white);font-size:0.65rem;font-weight:600;padding:0.2rem 0.75rem;border-radius:100px;letter-spacing:0.04em;text-transform:uppercase}
-.price-card h3{font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--light);margin-bottom:1rem}
-.price-amount{font-family:'Playfair Display',serif;font-size:2.75rem;color:var(--charcoal);margin-bottom:0.5rem}
-.price-detail{font-size:0.8rem;color:var(--light);margin-bottom:1.75rem;min-height:2.5rem}
-.price-card .btn{width:100%;text-align:center;font-size:0.8rem;padding:0.75rem}
-.price-card .btn-outline{width:100%;text-align:center;font-size:0.8rem;padding:0.75rem}
-.sub-note{color:var(--light);font-size:0.85rem;max-width:500px;margin:0 auto}
-.sub-note strong{color:var(--charcoal)}
+.price-card.featured::before{content:"Best value";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--white);font-size:0.6rem;font-weight:600;padding:0.25rem 1rem;border-radius:100px;letter-spacing:0.06em;text-transform:uppercase}
+.price-card h3{font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);margin-bottom:1.25rem}
+.price-amount{font-family:'Playfair Display',serif;font-size:3.25rem;color:var(--charcoal);margin-bottom:0.25rem;font-weight:400}
+.price-save{font-size:0.75rem;color:var(--sage-dark);font-weight:500;margin-bottom:0.75rem}
+.price-detail{font-size:0.8rem;color:var(--text-light);margin-bottom:2rem;min-height:2.5rem;font-weight:300;line-height:1.7}
+.price-card .btn{width:100%;text-align:center;font-size:0.8rem;padding:0.875rem}
+.price-card .btn-outline{width:100%;text-align:center;font-size:0.8rem;padding:0.875rem}
+.sub-note{color:var(--text-light);font-size:0.85rem;max-width:500px;margin:0 auto;font-weight:300;line-height:1.8}
+.sub-note strong{color:var(--charcoal);font-weight:500}
 
-/* FAQ */
-.faq{padding:6rem 0}
-.faq h2{text-align:center;font-size:clamp(1.5rem,3vw,2.25rem);margin-bottom:3rem}
-.faq-list{max-width:650px;margin:0 auto}
-.faq-item{border-bottom:1px solid var(--border)}
-.faq-q{padding:1.25rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.9rem;font-weight:500;color:var(--charcoal)}
-.faq-q::after{content:"+";font-size:1.1rem;color:var(--light);transition:transform 0.2s;font-weight:300}
-.faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{padding-bottom:1.25rem;font-size:0.875rem;color:var(--text);display:none;line-height:1.8}
-.faq-item.open .faq-a{display:block}
+/* ── FAQ ── */
+.faq{padding:8rem 0;border-bottom:1px solid var(--border)}
+.faq h2{text-align:center;font-size:clamp(1.75rem,3vw,2.75rem);margin-bottom:1rem;letter-spacing:-0.02em}
+.faq .section-sub{text-align:center;color:var(--text);font-size:0.9rem;margin-bottom:3.5rem;font-weight:300}
+.faq-list{max-width:620px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.9rem;font-weight:400;color:var(--charcoal);transition:color 0.2s}
+.faq-q:hover{color:var(--sage-dark)}
+.faq-icon{width:20px;height:20px;position:relative;flex-shrink:0;margin-left:1rem}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--text-light);transition:transform 0.3s}
+.faq-icon::before{width:12px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.faq-icon::after{width:1px;height:12px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.faq-item.open .faq-icon::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:1.5rem}
+.faq-a-inner{font-size:0.85rem;color:var(--text);font-weight:300;line-height:1.9}
 
-/* Final CTA */
-.final-cta{text-align:center;padding:6rem 0;border-top:1px solid var(--border)}
-.final-cta h2{font-size:clamp(1.75rem,3.5vw,2.5rem);max-width:550px;margin:0 auto 1.25rem}
-.final-cta p{color:var(--text);max-width:420px;margin:0 auto 2.5rem;font-size:0.95rem}
-.final-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+/* ── Final CTA ── */
+.final-cta{position:relative;text-align:center;padding:8rem 0;background:var(--charcoal);overflow:hidden}
+.final-cta::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=1600&q=80&auto=format&fit=crop') center/cover;opacity:0.08;filter:saturate(0)}
+.final-cta h2{color:var(--white);font-size:clamp(1.75rem,3.5vw,2.75rem);max-width:500px;margin:0 auto 1rem;letter-spacing:-0.02em;position:relative}
+.final-cta p{color:rgba(255,255,255,0.5);max-width:400px;margin:0 auto 3rem;font-size:0.9rem;font-weight:300;position:relative}
+.final-ctas{position:relative;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
-/* Footer */
-footer{padding:3rem 0;text-align:center;border-top:1px solid var(--border);font-size:0.75rem;color:var(--light)}
+/* ── Footer ── */
+footer{padding:3.5rem 0;text-align:center;font-size:0.75rem;color:var(--text-light)}
 footer p{margin-bottom:0.5rem}
-footer a{text-decoration:underline;text-underline-offset:2px}
-.disclaimer{max-width:600px;margin:1rem auto 0;font-size:0.7rem;line-height:1.6;color:#aaa}
+footer a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--border);transition:text-decoration-color 0.2s}
+footer a:hover{text-decoration-color:var(--text)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--charcoal);margin-bottom:1rem;font-weight:500}
+.disclaimer{max-width:540px;margin:1.25rem auto 0;font-size:0.65rem;line-height:1.7;color:#bbb}
 
-/* Mobile */
+/* ── Mobile ── */
 @media(max-width:768px){
-  .steps{grid-template-columns:1fr;gap:2rem}
-  .vert{grid-template-columns:1fr;gap:2rem}
-  .price-grid{grid-template-columns:1fr;max-width:320px}
-  .trust-bar{flex-direction:column;gap:0.5rem}
-  section{padding:4rem 0}
-  .hero{padding:8rem 0 0}
-  .hero-img{height:250px}
-  .vert-img{height:200px}
+  .container{padding:0 1.5rem}
+  .header-nav .header-link{display:none}
+  .header-inner{padding:1rem 1.5rem}
+  section{padding:5rem 0}
+  .hero{min-height:90vh}
+  .hero h1{font-size:2.25rem}
+  .hero-content{padding:1.5rem}
+  .steps{grid-template-columns:1fr;gap:0;background:none}
+  .step{border-bottom:1px solid var(--border);background:var(--bg)}
+  .step:last-child{border-bottom:none}
+  .vert{grid-template-columns:1fr}
+  .vert-visual{height:300px;position:relative}
+  .vert-visual img{position:absolute}
+  .vert-content{padding:3rem 1.5rem}
+  .price-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}
+  .trust-bar{flex-direction:column;gap:0.75rem}
 }
 
-/* Fade */
-.fade{opacity:0;transform:translateY(16px);transition:opacity 0.5s,transform 0.5s}
-.fade.in{opacity:1;transform:none}
+/* ── Animations ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(0.23,1,0.32,1),transform 0.7s cubic-bezier(0.23,1,0.32,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
 </style>
 </head>
 <body>
 
-<header class="header">
+<!-- Header -->
+<header class="header" id="header">
 <div class="header-inner">
-<div class="logo">Vetted</div>
+<a href="#" class="logo">Vetted</a>
+<nav class="header-nav">
+<a href="#how" class="header-link">How It Works</a>
+<a href="#audits" class="header-link">Audits</a>
+<a href="#pricing" class="header-link">Pricing</a>
 <a href="#pricing" class="header-cta">Get Your Audit</a>
+</nav>
 </div>
 </header>
 
+<!-- Hero -->
 <section class="hero">
-<div class="container">
-<h1>Your routine, reviewed by a physician.</h1>
-<p>A brand-agnostic, physician-reviewed audit of your supplement stack or skincare regimen. What to keep. What to cut. What's missing. Delivered in 48 hours.</p>
-<div class="hero-ctas">
-<a href="#pricing" class="btn">Get Your Audit — $97</a>
-<a href="#how" class="btn-outline">How It Works</a>
+<div class="hero-bg"></div>
+<div class="hero-content">
+<h1 class="reveal">Your routine, <em>reviewed by a physician.</em></h1>
+<p class="reveal reveal-delay-1">A brand-agnostic, physician-reviewed audit of your supplement stack or skincare regimen. Delivered in 48 hours.</p>
+<div class="hero-ctas reveal reveal-delay-2">
+<a href="#pricing" class="btn-white">Get Your Audit — $97</a>
+<a href="#how" class="btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2)">How It Works</a>
 </div>
-<div class="trust-bar">
+<div class="trust-bar reveal reveal-delay-3">
 <span class="trust-item">Licensed Physicians</span>
 <span class="trust-item">Brand-Agnostic</span>
 <span class="trust-item">48-Hour Turnaround</span>
 <span class="trust-item">HIPAA-Compliant</span>
 </div>
 </div>
-<img class="hero-img" src="https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=1200&q=80&auto=format&fit=crop" alt="Premium wellness products on marble surface">
 </section>
 
+<!-- Social Proof -->
+<div class="proof">
+<p>Physician-reviewed wellness audits — trusted by people who take their health seriously but want a <span>second opinion from someone who isn't selling them something.</span></p>
+</div>
+
+<!-- How It Works -->
 <section class="how" id="how">
 <div class="container">
-<h2>How it works</h2>
-<div class="steps fade">
-<div class="step">
+<div class="section-label reveal">How It Works</div>
+<h2 class="reveal">Three steps. One honest assessment.</h2>
+<p class="section-sub reveal">No appointment. No algorithm. A real physician reads your routine and tells you what they'd change.</p>
+</div>
+<div class="container">
+<div class="steps">
+<div class="step reveal reveal-delay-1">
 <div class="step-num">1</div>
 <h3>Submit</h3>
-<p>Complete a 10-minute intake form with your full routine, health goals, and current medications.</p>
+<p>10-minute intake form. Your full routine, health goals, and current medications.</p>
 </div>
-<div class="step">
+<div class="step reveal reveal-delay-2">
 <div class="step-num">2</div>
 <h3>Review</h3>
-<p>A licensed physician reads your intake, cross-references interactions, and writes your personalized report.</p>
+<p>A licensed physician cross-references interactions and writes your personalized report.</p>
 </div>
-<div class="step">
+<div class="step reveal reveal-delay-3">
 <div class="step-num">3</div>
 <h3>Receive</h3>
-<p>Within 48 hours — a clear, organized audit. What to keep, what to cut, what to change, and why.</p>
+<p>Within 48 hours — what to keep, what to cut, what to change, and why.</p>
 </div>
 </div>
 </div>
 </section>
 
-<section class="verticals">
-<div class="container">
+<!-- Verticals -->
+<div class="verticals" id="audits">
 
-<div class="vert fade">
-<div>
-<img class="vert-img" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80&auto=format&fit=crop" alt="Supplement capsules">
-<div class="vert-label">Supplement Stack Audit</div>
-<h2>Know if your stack is working — or working against you.</h2>
-<p>A family medicine physician reviews your entire supplement routine against clinical evidence and your current medications.</p>
-<ul>
+<div class="vert">
+<div class="vert-content">
+<div class="section-label reveal">Supplement Stack Audit</div>
+<h2 class="reveal">Know if your stack is working — or working against you.</h2>
+<p class="reveal">A family medicine physician reviews your entire supplement routine against clinical evidence and your current medications.</p>
+<ul class="reveal">
 <li>Drug-supplement interaction check</li>
 <li>Redundancy and dosage analysis</li>
 <li>Personalized keep / cut / add recommendations</li>
 <li>Plain-language physician report</li>
 </ul>
-<a href="#pricing" class="btn">Get Supplement Audit — $97</a>
-</div>
-<div class="examples">
-<h4>What we commonly find</h4>
+<a href="#pricing" class="btn reveal">Get Supplement Audit — $97</a>
+<div class="vert-examples reveal">
+<h4>Common findings</h4>
 <div class="ex"><strong>10mg melatonin nightly</strong> — receptor downregulation. Evidence supports 0.3–1mg.</div>
 <div class="ex"><strong>St. John's Wort + SSRIs</strong> — serotonin syndrome risk.</div>
-<div class="ex"><strong>Magnesium Oxide</strong> — 4% absorption. Glycinate is 80%+.</div>
-<div class="ex"><strong>BCAAs + adequate protein</strong> — redundant. Expensive urine.</div>
+<div class="ex"><strong>Magnesium Oxide</strong> — 4% absorption vs. 80%+ for Glycinate.</div>
+</div>
+</div>
+<div class="vert-visual">
+<img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1000&q=80&auto=format&fit=crop" alt="Supplement capsules">
 </div>
 </div>
 
-<div class="vert fade">
-<div>
-<img class="vert-img" src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80&auto=format&fit=crop" alt="Skincare products collection">
-<div class="vert-label">Skincare Routine Audit</div>
-<h2>A dermatologist reviewed your routine. See what she found.</h2>
-<p>A board-certified dermatologist analyzes your full AM/PM routine for compatibility, layering order, and ingredient conflicts.</p>
-<ul>
+<div class="vert">
+<div class="vert-visual">
+<img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=1000&q=80&auto=format&fit=crop" alt="Skincare products">
+</div>
+<div class="vert-content">
+<div class="section-label reveal">Skincare Routine Audit</div>
+<h2 class="reveal">A dermatologist reviewed your routine. See what she found.</h2>
+<p class="reveal">A board-certified dermatologist analyzes your full AM/PM routine for compatibility, layering order, and ingredient conflicts.</p>
+<ul class="reveal">
 <li>Full AM/PM routine analysis</li>
 <li>Ingredient compatibility and layering order</li>
 <li>Product swap recommendations at three price tiers</li>
 <li>Dermatologist sign-off with clear reasoning</li>
 </ul>
-<a href="#pricing" class="btn">Get Skincare Audit — $97</a>
-</div>
-<div class="examples">
-<h4>What we commonly find</h4>
+<a href="#pricing" class="btn reveal">Get Skincare Audit — $97</a>
+<div class="vert-examples reveal">
+<h4>Common findings</h4>
 <div class="ex"><strong>Physical scrub + AHA + retinoid</strong> — barrier destruction.</div>
-<div class="ex"><strong>Vitamin C + retinoid together</strong> — unnecessary irritation. Separate AM/PM.</div>
-<div class="ex"><strong>No SPF</strong> — the most evidence-backed anti-aging step, skipped entirely.</div>
-<div class="ex"><strong>8-product acne routine</strong> — zero products targeting the actual cause.</div>
+<div class="ex"><strong>Vitamin C + retinoid together</strong> — separate AM/PM.</div>
+<div class="ex"><strong>No SPF</strong> — the #1 evidence-backed anti-aging step, skipped.</div>
+</div>
 </div>
 </div>
 
 </div>
-</section>
 
+<!-- Pricing -->
 <section class="pricing" id="pricing">
 <div class="container">
-<h2>Simple pricing</h2>
-<p>One-time audits. No subscriptions required. No products sold.</p>
-<div class="price-grid fade">
-<div class="price-card">
+<div class="section-label reveal">Pricing</div>
+<h2 class="reveal">Simple, transparent pricing.</h2>
+<p class="section-sub reveal">One-time audits. No products sold. Ever.</p>
+<div class="price-grid">
+<div class="price-card reveal reveal-delay-1">
 <h3>Supplement Audit</h3>
 <div class="price-amount">$97</div>
-<p class="price-detail">Full stack review by a family medicine physician</p>
+<p class="price-detail">Full stack review by a licensed family medicine physician</p>
 <a href="#get-started" class="btn-outline">Get Started</a>
 </div>
-<div class="price-card featured">
+<div class="price-card featured reveal reveal-delay-2">
 <h3>Both Audits</h3>
 <div class="price-amount">$149</div>
-<p class="price-detail">Supplements + skincare — reviewed by both physicians</p>
+<div class="price-save">Save $45</div>
+<p class="price-detail">Supplements + skincare reviewed by both physicians</p>
 <a href="#get-started" class="btn">Get Both</a>
 </div>
-<div class="price-card">
+<div class="price-card reveal reveal-delay-3">
 <h3>Skincare Audit</h3>
 <div class="price-amount">$97</div>
 <p class="price-detail">Full routine review by a board-certified dermatologist</p>
 <a href="#get-started" class="btn-outline">Get Started</a>
 </div>
 </div>
-<p class="sub-note"><strong>Quarterly re-audits — $39/month.</strong> A physician reviews your updated routine every 3 months as your stack evolves. Cancel anytime.</p>
+<p class="sub-note reveal"><strong>Quarterly re-audits — $39/month.</strong> A physician reviews your updated routine every 3 months. Cancel anytime.</p>
 </div>
 </section>
 
+<!-- FAQ -->
 <section class="faq" id="faq">
 <div class="container">
-<h2>Questions</h2>
+<div class="section-label reveal" style="text-align:center">FAQ</div>
+<h2 class="reveal">Common questions.</h2>
+<p class="section-sub reveal">Everything else, just email us.</p>
 <div class="faq-list">
-<div class="faq-item"><div class="faq-q">Is this medical advice?</div><div class="faq-a">No. This is wellness education — what a knowledgeable physician would tell a close friend after reviewing their routine. It does not establish a doctor-patient relationship or replace your healthcare provider.</div></div>
-<div class="faq-item"><div class="faq-q">Who reviews my audit?</div><div class="faq-a">Supplement audits: a licensed family medicine physician. Skincare audits: a board-certified dermatologist. Real practitioners in active clinical practice.</div></div>
-<div class="faq-item"><div class="faq-q">What if I'm on prescription medications?</div><div class="faq-a">List them on the intake form. Drug-supplement interactions are one of the most important things we check. If anything falls outside the scope of a wellness audit, we'll tell you directly.</div></div>
-<div class="faq-item"><div class="faq-q">Do I need a complex routine already?</div><div class="faq-a">No. Some of our best audits are for people starting from scratch who want to build the right foundation instead of wasting months on trial and error.</div></div>
-<div class="faq-item"><div class="faq-q">How long does it take?</div><div class="faq-a">48 hours from completed intake submission. Quarterly subscribers get priority queue.</div></div>
-<div class="faq-item"><div class="faq-q">Is my information secure?</div><div class="faq-a">Yes. HIPAA-compliant infrastructure. Your data is shared only with the reviewing physician and never sold to third parties.</div></div>
+<div class="faq-item reveal"><div class="faq-q">Is this medical advice?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">No. This is wellness education — what a knowledgeable physician would tell a close friend after reviewing their routine. It does not establish a doctor-patient relationship or replace your healthcare provider.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q">Who reviews my audit?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">Supplement audits: a licensed family medicine physician. Skincare audits: a board-certified dermatologist. Real practitioners in active clinical practice.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q">What if I'm on prescription medications?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">List them on the intake form. Drug-supplement interactions are one of the most important things we check. If anything requires clinical evaluation beyond a wellness audit, we'll tell you directly.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q">Do I need a complex routine already?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">No. Some of our best audits are for people starting from scratch who want to build the right foundation instead of months of trial and error.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q">How long does it take?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">48 hours from completed intake. Quarterly subscribers get priority queue.</div></div></div>
+<div class="faq-item reveal"><div class="faq-q">Is my data secure?<span class="faq-icon"></span></div><div class="faq-a"><div class="faq-a-inner">HIPAA-compliant infrastructure. Shared only with the reviewing physician. Never sold.</div></div></div>
 </div>
 </div>
 </section>
 
+<!-- Final CTA -->
 <section class="final-cta">
 <div class="container">
-<h2>Let a physician check your work.</h2>
-<p>$97 per audit. $149 for both. No products sold. No algorithm pretending to be a doctor.</p>
-<div class="final-ctas">
-<a href="#get-started" class="btn">Get Your Audit</a>
+<h2 class="reveal">Let a physician check your work.</h2>
+<p class="reveal">$97 per audit. $149 for both. No products sold. No algorithm pretending to be a doctor.</p>
+<div class="final-ctas reveal">
+<a href="#get-started" class="btn-white">Get Your Audit</a>
 </div>
 </div>
 </section>
 
+<!-- Footer -->
 <footer>
 <div class="container">
-<p style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--charcoal);margin-bottom:0.75rem">Vetted</p>
+<div class="footer-logo">Vetted</div>
 <p><a href="mailto:hello@vettedhealth.com">hello@vettedhealth.com</a></p>
 <p class="disclaimer">Vetted provides wellness education reviewed by licensed physicians. This service does not constitute medical advice, diagnosis, or treatment, and does not establish a doctor-patient relationship. Always consult your healthcare provider before making changes to your routine.</p>
-<p style="margin-top:1rem">© 2026 Vetted</p>
+<p style="margin-top:1.25rem;font-size:0.7rem">© 2026 Vetted</p>
 </div>
 </footer>
 
 <script>
-document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
-const o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:0.15});
-document.querySelectorAll('.fade').forEach(el=>o.observe(el));
+// Header scroll
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>80)});
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const a=item.querySelector('.faq-a');
+    const inner=a.querySelector('.faq-a-inner');
+    if(item.classList.contains('open')){
+      a.style.maxHeight='0';a.style.paddingBottom='0';
+      item.classList.remove('open');
+    }else{
+      document.querySelectorAll('.faq-item.open').forEach(i=>{
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight='0';
+        i.querySelector('.faq-a').style.paddingBottom='0';
+      });
+      item.classList.add('open');
+      a.style.maxHeight=inner.scrollHeight+'px';
+      a.style.paddingBottom='1.5rem';
+    }
+  });
+});
+
+// Reveal on scroll
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
