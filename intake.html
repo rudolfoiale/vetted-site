@@ -81,6 +81,12 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .supplement-list,.product-list{margin-top:1rem}
 .supplement-item,.product-item{background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem}
 .supplement-item:last-child,.product-item:last-child{margin-bottom:0}
+.autocomplete-wrapper{position:relative}
+.autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;max-height:200px;overflow-y:auto;z-index:50;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.autocomplete-list.show{display:block}
+.autocomplete-item{padding:0.6rem 1rem;font-size:0.85rem;cursor:pointer;color:var(--charcoal);transition:background 0.1s}
+.autocomplete-item:hover,.autocomplete-item.highlighted{background:var(--bg-alt)}
+.autocomplete-item small{color:var(--text-light);margin-left:0.25rem}
 .item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
 .item-number{font-size:0.75rem;font-weight:600;color:var(--sage-dark);text-transform:uppercase;letter-spacing:0.06em}
 .remove-btn{background:none;border:none;color:var(--text-light);font-size:0.75rem;cursor:pointer;padding:0.25rem 0.5rem;transition:color 0.2s;text-decoration:underline;text-underline-offset:2px}
@@ -426,8 +432,11 @@ function addSupplement(){
       ${supplementCount > 1 ? '<button type="button" class="remove-btn" onclick="this.parentElement.parentElement.remove()">Remove</button>' : ''}
     </div>
     <div class="item-row">
-      <input type="text" class="form-input" placeholder="Supplement name" data-supp-field="name" required>
-      <input type="text" class="form-input" placeholder="Brand (optional)" data-supp-field="brand">
+      <div class="autocomplete-wrapper" style="flex:1">
+        <input type="text" class="form-input supp-autocomplete" placeholder="Start typing supplement name..." data-supp-field="name" autocomplete="off" required>
+        <div class="autocomplete-list"></div>
+      </div>
+      <input type="text" class="form-input" placeholder="Brand (optional)" data-supp-field="brand" style="flex:0.6">
     </div>
     <div class="item-row">
       <input type="text" class="form-input" placeholder="Dose (e.g., 300mg)" data-supp-field="dose" required>
@@ -560,6 +569,79 @@ function handleSubmit(e){
 
   return false;
 }
+
+// Supplement autocomplete database
+const SUPPLEMENTS = [
+  "Acetyl L-Carnitine","Activated Charcoal","Alpha GPC","Alpha Lipoic Acid","Andrographis","Apigenin","Ashwagandha","Astaxanthin","Astragalus",
+  "B-Complex","Bacopa Monnieri","Bee Pollen","Berberine","Beta-Alanine","Betaine HCL","Biotin","Black Seed Oil","Boron","Boswellia","Bromelain","Butyrate",
+  "Calcium","Calcium D-Glucarate","CBD Oil","Chaga Mushroom","Chlorella","Chlorophyll","Choline","Chromium","Citicoline (CDP-Choline)","CLA","CoQ10 (Ubiquinol)","CoQ10 (Ubiquinone)","Collagen Peptides","Colostrum","Copper","Cordyceps","Creatine Monohydrate","Creatine HCL","Curcumin / Turmeric",
+  "DHA","DHEA","DIM (Diindolylmethane)","Digestive Enzymes","DMAE","Dong Quai",
+  "Echinacea","Elderberry","EPA","Evening Primrose Oil",
+  "Fenugreek","Fiber (Psyllium)","Fish Oil / Omega-3","Folate (Methylfolate)","Folic Acid","Forskolin",
+  "GABA","Garlic Extract","Ginger Root","Ginkgo Biloba","Glucosamine","Glucosamine + Chondroitin","Glutamine","Glutathione","Glycine","Gotu Kola","Grape Seed Extract","Green Tea Extract","Greens Powder","Guar Gum",
+  "HMB","Holy Basil (Tulsi)","Hyaluronic Acid",
+  "Iodine","Inositol","Iron","Ivermectin",
+  "K2 (MK-4)","K2 (MK-7)","Kava","KSM-66 Ashwagandha","Krill Oil",
+  "L-Arginine","L-Carnitine","L-Citrulline","L-Glutamine","L-Lysine","L-Theanine","L-Tryptophan","L-Tyrosine","Lecithin","Lion's Mane","Lithium Orotate","Lutein","Lycopene",
+  "Maca Root","Magnesium Bisglycinate","Magnesium Citrate","Magnesium Glycinate","Magnesium L-Threonate","Magnesium Malate","Magnesium Oxide","Magnesium Taurate","Manganese","MCT Oil","Melatonin","Methylcobalamin (B12)","Milk Thistle","Molybdenum","MSM","Mucuna Pruriens","Multivitamin","Mushroom Complex",
+  "N-Acetyl Cysteine (NAC)","Nattokinase","Niacin (B3)","NMN","NR (Nicotinamide Riboside)",
+  "Olive Leaf Extract","Omega-3 (Fish Oil)","Omega-3 (Algae)","Oregano Oil",
+  "Palmitoylethanolamide (PEA)","Pantothenic Acid (B5)","Passionflower","Phosphatidylserine","Pine Bark Extract","Potassium","Prebiotics","Probiotics","Psyllium Husk","PQQ","Pygeum",
+  "Quercetin",
+  "Red Yeast Rice","Reishi Mushroom","Resveratrol","Rhodiola Rosea","Riboflavin (B2)",
+  "S-Adenosyl Methionine (SAMe)","Saw Palmetto","Selenium","Serrapeptase","Shilajit","Slippery Elm","Soy Isoflavones","Spirulina","St. John's Wort","Stinging Nettle","Sulforaphane","Sundried Tomato Extract",
+  "Taurine","Tea Tree Oil","Theacrine","Thiamine (B1)","Tongkat Ali","Tribulus Terrestris","Turkey Tail Mushroom","Turmeric / Curcumin",
+  "Ubiquinol","Uridine",
+  "Valerian Root","Vitamin A","Vitamin B1","Vitamin B2","Vitamin B3","Vitamin B5","Vitamin B6","Vitamin B7 (Biotin)","Vitamin B9 (Folate)","Vitamin B12","Vitamin C","Vitamin D2","Vitamin D3","Vitamin D3 + K2","Vitamin E","Vitamin K1","Vitamin K2",
+  "Whey Protein","White Willow Bark",
+  "Zeaxanthin","Zinc (Gluconate)","Zinc (Picolinate)","Zinc (Citrate)","Zinc Carnosine","ZMA",
+  "5-HTP","7-Keto DHEA","BCAAs","EAAs","EGCG","HGH Secretagogues","MCTs","NAD+","TUDCA"
+];
+
+// Autocomplete handler
+document.addEventListener('input', function(e){
+  if(!e.target.classList.contains('supp-autocomplete')) return;
+  const val = e.target.value.toLowerCase().trim();
+  const listEl = e.target.parentElement.querySelector('.autocomplete-list');
+  if(val.length < 2){ listEl.classList.remove('show'); return; }
+  const matches = SUPPLEMENTS.filter(s => s.toLowerCase().includes(val)).slice(0,8);
+  if(matches.length === 0){ listEl.classList.remove('show'); return; }
+  listEl.innerHTML = matches.map(m => {
+    const idx = m.toLowerCase().indexOf(val);
+    const highlighted = m.substring(0,idx) + '<strong>' + m.substring(idx, idx+val.length) + '</strong>' + m.substring(idx+val.length);
+    return '<div class="autocomplete-item">' + highlighted + '</div>';
+  }).join('');
+  listEl.classList.add('show');
+});
+
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('autocomplete-item')){
+    const input = e.target.closest('.autocomplete-wrapper').querySelector('input');
+    input.value = e.target.textContent;
+    e.target.parentElement.classList.remove('show');
+    // Auto-focus the dose field
+    const doseInput = input.closest('.supplement-item').querySelector('[data-supp-field="dose"]');
+    if(doseInput) setTimeout(()=>doseInput.focus(), 100);
+  } else {
+    document.querySelectorAll('.autocomplete-list').forEach(l => l.classList.remove('show'));
+  }
+});
+
+// Keyboard navigation for autocomplete
+document.addEventListener('keydown', function(e){
+  if(!e.target.classList.contains('supp-autocomplete')) return;
+  const listEl = e.target.parentElement.querySelector('.autocomplete-list');
+  if(!listEl.classList.contains('show')) return;
+  const items = listEl.querySelectorAll('.autocomplete-item');
+  const current = listEl.querySelector('.highlighted');
+  let idx = Array.from(items).indexOf(current);
+  if(e.key === 'ArrowDown'){ e.preventDefault(); idx = Math.min(idx+1, items.length-1); }
+  else if(e.key === 'ArrowUp'){ e.preventDefault(); idx = Math.max(idx-1, 0); }
+  else if(e.key === 'Enter' && current){ e.preventDefault(); current.click(); return; }
+  else return;
+  items.forEach(i => i.classList.remove('highlighted'));
+  if(items[idx]) items[idx].classList.add('highlighted');
+});
 </script>
 
 </body>
