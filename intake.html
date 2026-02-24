@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake Form — Vetted</title>
+<meta name="description" content="Submit your supplement stack or skincare routine for physician review. 10-minute intake form.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAFAF8;
+  --bg-alt:#F4F3F0;
+  --charcoal:#1D1D1F;
+  --text:#6B6B6B;
+  --text-light:#999;
+  --sage:#8B9A8D;
+  --sage-dark:#6B7D6E;
+  --black:#111;
+  --white:#fff;
+  --cream:#F8F7F4;
+  --border:#E8E6E1;
+  --border-light:#F0EEEA;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.75;background:var(--bg);font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--charcoal);font-weight:400;line-height:1.2}
+a{color:inherit;text-decoration:none}
+
+/* Grain overlay */
+body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+
+.container{max-width:680px;margin:0 auto;padding:3rem 2rem}
+
+/* Header */
+.header{text-align:center;margin-bottom:3rem}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--charcoal);margin-bottom:1rem;font-weight:500}
+.header h1{font-size:clamp(1.75rem,4vw,2.5rem);margin-bottom:0.75rem;letter-spacing:-0.02em}
+.header p{color:var(--text);font-size:0.9rem;font-weight:300;max-width:480px;margin:0 auto}
+.back-link{display:inline-block;color:var(--text-light);font-size:0.75rem;margin-bottom:2rem;text-decoration:none;transition:color 0.2s}
+.back-link:hover{color:var(--charcoal)}
+
+/* Progress Bar */
+.progress-container{margin-bottom:3rem}
+.progress-bar{height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-dark));transition:width 0.4s ease;border-radius:4px}
+.progress-steps{display:flex;justify-content:space-between;margin-top:1rem}
+.progress-step{font-size:0.7rem;color:var(--text-light);font-weight:500;text-transform:uppercase;letter-spacing:0.06em}
+.progress-step.active{color:var(--sage-dark)}
+.progress-step.completed{color:var(--sage)}
+
+/* Form */
+.form-section{display:none;animation:fadeIn 0.4s ease}
+.form-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:3rem 2.5rem}
+
+.form-group{margin-bottom:2rem}
+.form-group:last-child{margin-bottom:0}
+.form-label{display:block;font-size:0.8rem;font-weight:500;color:var(--charcoal);margin-bottom:0.5rem;letter-spacing:0.01em}
+.form-label .optional{color:var(--text-light);font-weight:400;font-size:0.75rem;margin-left:0.5rem}
+.form-input,.form-textarea,.form-select{width:100%;padding:0.875rem 1.25rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--charcoal);background:var(--bg);transition:border-color 0.2s,background 0.2s;outline:none}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--sage);background:var(--white)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-light)}
+.form-textarea{min-height:120px;resize:vertical;line-height:1.6}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:3rem}
+
+.radio-group{display:flex;flex-direction:column;gap:0.75rem}
+.radio-option{display:flex;align-items:center;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s}
+.radio-option:hover{border-color:var(--sage)}
+.radio-option input{margin-right:0.875rem;cursor:pointer;accent-color:var(--sage)}
+.radio-option label{font-size:0.85rem;color:var(--charcoal);cursor:pointer;flex:1}
+.radio-option .radio-desc{font-size:0.75rem;color:var(--text-light);margin-top:0.25rem;font-weight:300}
+
+.checkbox-group{display:flex;align-items:flex-start;padding:1rem;background:var(--bg-alt);border-radius:8px;margin-top:1rem}
+.checkbox-group input{margin-right:0.875rem;margin-top:0.25rem;cursor:pointer;accent-color:var(--sage)}
+.checkbox-group label{font-size:0.75rem;color:var(--text);cursor:pointer;line-height:1.7;font-weight:300}
+
+.supplement-list,.product-list{margin-top:1rem}
+.supplement-item,.product-item{background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.supplement-item:last-child,.product-item:last-child{margin-bottom:0}
+.item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.item-number{font-size:0.75rem;font-weight:600;color:var(--sage-dark);text-transform:uppercase;letter-spacing:0.06em}
+.remove-btn{background:none;border:none;color:var(--text-light);font-size:0.75rem;cursor:pointer;padding:0.25rem 0.5rem;transition:color 0.2s;text-decoration:underline;text-underline-offset:2px}
+.remove-btn:hover{color:#d97706}
+.item-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem}
+.item-row:last-child{margin-bottom:0}
+.item-row.full{grid-template-columns:1fr}
+
+.add-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--bg);border:1px dashed var(--border);color:var(--sage-dark);padding:0.875rem 1.5rem;border-radius:8px;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:1rem}
+.add-btn:hover{background:var(--white);border-color:var(--sage);transform:translateY(-1px)}
+.add-btn::before{content:"+";font-size:1.2rem;font-weight:400}
+
+/* Buttons */
+.btn-group{display:flex;gap:0.75rem;margin-top:2.5rem}
+.btn-back,.btn-next,.btn-submit{flex:1;padding:0.875rem 2rem;border-radius:100px;font-size:0.8rem;font-weight:500;letter-spacing:0.03em;transition:all 0.3s;cursor:pointer;border:1px solid;text-align:center}
+.btn-back{background:transparent;color:var(--text);border-color:var(--border)}
+.btn-back:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.btn-next,.btn-submit{background:var(--charcoal);color:var(--white);border-color:var(--charcoal)}
+.btn-next:hover,.btn-submit:hover{background:var(--black);border-color:var(--black);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.btn-next:disabled,.btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* Review Section */
+.review-section{background:var(--bg-alt);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+.review-section h3{font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;color:var(--charcoal);margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.06em}
+.review-item{display:flex;justify-content:space-between;padding:0.5rem 0;font-size:0.85rem}
+.review-item:not(:last-child){border-bottom:1px solid var(--border-light)}
+.review-label{color:var(--text-light);font-weight:400}
+.review-value{color:var(--charcoal);font-weight:500;text-align:right}
+.review-list{margin-top:0.75rem}
+.review-list-item{background:var(--white);padding:0.75rem 1rem;border-radius:6px;margin-bottom:0.5rem;font-size:0.8rem;color:var(--text)}
+.review-list-item:last-child{margin-bottom:0}
+.review-list-item strong{color:var(--charcoal);font-weight:500}
+
+/* Success */
+.success-state{display:none;text-align:center;padding:3rem 2rem}
+.success-state.active{display:block}
+.success-icon{font-size:3rem;margin-bottom:1.5rem}
+.success-state h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0.75rem}
+.success-state p{color:var(--text);font-size:0.9rem;font-weight:300;margin-bottom:2rem;max-width:400px;margin-left:auto;margin-right:auto}
+.btn-home{display:inline-block;background:var(--charcoal);color:var(--white);padding:0.875rem 2rem;border-radius:100px;font-size:0.8rem;font-weight:500;transition:all 0.3s}
+.btn-home:hover{background:var(--black);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+
+/* Mobile */
+@media(max-width:768px){
+  .container{padding:2rem 1.5rem}
+  .form-card{padding:2rem 1.5rem}
+  .item-row{grid-template-columns:1fr}
+  .btn-group{flex-direction:column}
+  .progress-steps{font-size:0.65rem}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<a href="index.html" class="back-link">← Back to home</a>
+
+<div class="header">
+<div class="logo">Vetted</div>
+<h1>Get Your Audit</h1>
+<p>A physician-reviewed audit of your routine. This takes about 10 minutes. All information is HIPAA-compliant.</p>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill" style="width:25%"></div>
+</div>
+<div class="progress-steps">
+<div class="progress-step active" id="step1Label">Your Info</div>
+<div class="progress-step" id="step2Label">Audit Type</div>
+<div class="progress-step" id="step3Label">Details</div>
+<div class="progress-step" id="step4Label">Review</div>
+</div>
+</div>
+
+<!-- Netlify Form (hidden, for detection) -->
+<form name="intake" netlify netlify-honeypot="bot-field" hidden>
+<input name="bot-field">
+<input name="name">
+<input name="email">
+<input name="age">
+<input name="sex">
+<input name="audit-type">
+<input name="supplements-data">
+<input name="skincare-data">
+<input name="medications">
+<input name="health-goals">
+<input name="conditions">
+<input name="skin-type">
+<input name="skin-concerns">
+</form>
+
+<!-- Main Form -->
+<form id="intakeForm" class="form-card" onsubmit="return handleSubmit(event)">
+<input type="hidden" name="form-name" value="intake">
+<input type="hidden" name="bot-field">
+<input type="hidden" name="supplements-data" id="supplementsData">
+<input type="hidden" name="skincare-data" id="skincareData">
+
+<!-- Step 1: Your Info -->
+<div class="form-section active" id="section1">
+<div class="form-group">
+<label class="form-label" for="name">Full Name</label>
+<input type="text" class="form-input" id="name" name="name" placeholder="Jane Doe" required>
+</div>
+<div class="form-group">
+<label class="form-label" for="email">Email Address</label>
+<input type="email" class="form-input" id="email" name="email" placeholder="jane@example.com" required>
+</div>
+<div class="form-group">
+<label class="form-label" for="age">Age</label>
+<input type="number" class="form-input" id="age" name="age" placeholder="32" min="18" max="120" required>
+</div>
+<div class="form-group">
+<label class="form-label">Sex</label>
+<div class="radio-group">
+<div class="radio-option">
+<input type="radio" id="sexM" name="sex" value="Male" required>
+<label for="sexM">Male</label>
+</div>
+<div class="radio-option">
+<input type="radio" id="sexF" name="sex" value="Female">
+<label for="sexF">Female</label>
+</div>
+<div class="radio-option">
+<input type="radio" id="sexO" name="sex" value="Other">
+<label for="sexO">Other / Prefer not to say</label>
+</div>
+</div>
+</div>
+<div class="btn-group">
+<button type="button" class="btn-next" onclick="nextStep(1)">Continue</button>
+</div>
+</div>
+
+<!-- Step 2: Audit Type -->
+<div class="form-section" id="section2">
+<div class="form-group">
+<label class="form-label">Which audit would you like?</label>
+<div class="radio-group">
+<div class="radio-option">
+<input type="radio" id="auditSupp" name="audit-type" value="Supplement Stack Audit ($97)" required>
+<div style="flex:1">
+<label for="auditSupp">Supplement Stack Audit — $97</label>
+<div class="radio-desc">Full stack review by a licensed family medicine physician</div>
+</div>
+</div>
+<div class="radio-option">
+<input type="radio" id="auditSkin" name="audit-type" value="Skincare Routine Audit ($97)">
+<div style="flex:1">
+<label for="auditSkin">Skincare Routine Audit — $97</label>
+<div class="radio-desc">Full routine review by a board-certified dermatologist</div>
+</div>
+</div>
+<div class="radio-option">
+<input type="radio" id="auditBoth" name="audit-type" value="Both Audits ($149 — Save $45)">
+<div style="flex:1">
+<label for="auditBoth">Both Audits — $149 (Save $45)</label>
+<div class="radio-desc">Supplements + skincare reviewed by both physicians</div>
+</div>
+</div>
+</div>
+</div>
+<div class="btn-group">
+<button type="button" class="btn-back" onclick="prevStep(2)">Back</button>
+<button type="button" class="btn-next" onclick="nextStep(2)">Continue</button>
+</div>
+</div>
+
+<!-- Step 3: Details -->
+<div class="form-section" id="section3">
+<!-- Supplements -->
+<div id="supplementsSection" style="display:none">
+<h3 style="font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem">Your Supplement Stack</h3>
+<div class="supplement-list" id="supplementList"></div>
+<button type="button" class="add-btn" onclick="addSupplement()">Add Supplement</button>
+
+<div class="form-group" style="margin-top:2rem">
+<label class="form-label" for="medications">Current Prescription Medications <span class="optional">(if any)</span></label>
+<textarea class="form-textarea" id="medications" name="medications" placeholder="List all prescription medications, dosage, and frequency. Example: Escitalopram (Lexapro) 10mg daily"></textarea>
+</div>
+<div class="form-group">
+<label class="form-label" for="health-goals">Health Goals</label>
+<textarea class="form-textarea" id="health-goals" name="health-goals" placeholder="What are you trying to achieve? (e.g., better sleep, reduce anxiety, increase energy)" required></textarea>
+</div>
+<div class="form-group">
+<label class="form-label" for="conditions">Current Health Conditions <span class="optional">(if any)</span></label>
+<textarea class="form-textarea" id="conditions" name="conditions" placeholder="Any diagnosed conditions, allergies, or health concerns the physician should know about"></textarea>
+</div>
+</div>
+
+<!-- Skincare -->
+<div id="skincareSection" style="display:none">
+<h3 style="font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem">Your Skincare Routine</h3>
+<div class="form-group">
+<label class="form-label">AM Routine Products</label>
+<div class="product-list" id="amProductList"></div>
+<button type="button" class="add-btn" onclick="addProduct('am')">Add AM Product</button>
+</div>
+<div class="form-group">
+<label class="form-label">PM Routine Products</label>
+<div class="product-list" id="pmProductList"></div>
+<button type="button" class="add-btn" onclick="addProduct('pm')">Add PM Product</button>
+</div>
+<div class="form-group">
+<label class="form-label" for="skin-type">Skin Type</label>
+<select class="form-select" id="skin-type" name="skin-type">
+<option value="">Select skin type</option>
+<option value="Normal">Normal</option>
+<option value="Dry">Dry</option>
+<option value="Oily">Oily</option>
+<option value="Combination">Combination</option>
+<option value="Sensitive">Sensitive</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label" for="skin-concerns">Skin Concerns</label>
+<textarea class="form-textarea" id="skin-concerns" name="skin-concerns" placeholder="e.g., acne, fine lines, hyperpigmentation, dryness, redness"></textarea>
+</div>
+<div class="form-group">
+<label class="form-label" for="skin-medications">Current Medications <span class="optional">(if any)</span></label>
+<textarea class="form-textarea" id="skin-medications" name="skin-medications" placeholder="Any prescription skincare or oral medications (e.g., tretinoin, spironolactone)"></textarea>
+</div>
+</div>
+
+<div class="btn-group">
+<button type="button" class="btn-back" onclick="prevStep(3)">Back</button>
+<button type="button" class="btn-next" onclick="nextStep(3)">Continue</button>
+</div>
+</div>
+
+<!-- Step 4: Review & Submit -->
+<div class="form-section" id="section4">
+<h3 style="font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:600;color:var(--charcoal);margin-bottom:1.5rem">Review Your Information</h3>
+
+<div id="reviewContent"></div>
+
+<div class="checkbox-group">
+<input type="checkbox" id="agree" required>
+<label for="agree">I understand this is a wellness education service and does not constitute medical advice. I have read the disclaimer and agree to the terms.</label>
+</div>
+
+<div class="btn-group">
+<button type="button" class="btn-back" onclick="prevStep(4)">Back</button>
+<button type="submit" class="btn-submit">Submit & Pay</button>
+</div>
+</div>
+</form>
+
+<!-- Success State -->
+<div class="success-state" id="successState">
+<div class="success-icon">✓</div>
+<h2>Intake Received!</h2>
+<p>We've received your information. You'll receive a payment link via email within the next few minutes. Once payment is confirmed, your audit will be completed within 48 hours.</p>
+<a href="index.html" class="btn-home">Back to Home</a>
+</div>
+
+</div>
+
+<script>
+let currentStep = 1;
+let supplementCount = 1;
+let amProductCount = 1;
+let pmProductCount = 1;
+
+// Initialize first supplement
+window.addEventListener('load',()=>{
+  addSupplement();
+  addProduct('am');
+  addProduct('pm');
+});
+
+function updateProgress(){
+  const progress = (currentStep / 4) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  
+  for(let i=1;i<=4;i++){
+    const label = document.getElementById(`step${i}Label`);
+    label.classList.remove('active','completed');
+    if(i<currentStep) label.classList.add('completed');
+    if(i===currentStep) label.classList.add('active');
+  }
+}
+
+function nextStep(step){
+  // Validation
+  const section = document.getElementById(`section${step}`);
+  const inputs = section.querySelectorAll('input[required],select[required],textarea[required]');
+  let valid = true;
+  inputs.forEach(input=>{
+    if(!input.checkValidity()){
+      valid=false;
+      input.reportValidity();
+    }
+  });
+  if(!valid) return;
+
+  // Step 2 specific: show relevant section in step 3
+  if(step===2){
+    const auditType = document.querySelector('input[name="audit-type"]:checked').value;
+    const suppSection = document.getElementById('supplementsSection');
+    const skinSection = document.getElementById('skincareSection');
+    suppSection.style.display = 'none';
+    skinSection.style.display = 'none';
+    
+    if(auditType.includes('Supplement') || auditType.includes('Both')){
+      suppSection.style.display = 'block';
+    }
+    if(auditType.includes('Skincare') || auditType.includes('Both')){
+      skinSection.style.display = 'block';
+    }
+  }
+
+  // Step 3 specific: build review
+  if(step===3){
+    buildReview();
+  }
+
+  // Move to next step
+  document.getElementById(`section${step}`).classList.remove('active');
+  currentStep = step + 1;
+  document.getElementById(`section${currentStep}`).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function prevStep(step){
+  document.getElementById(`section${step}`).classList.remove('active');
+  currentStep = step - 1;
+  document.getElementById(`section${currentStep}`).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function addSupplement(){
+  const list = document.getElementById('supplementList');
+  const item = document.createElement('div');
+  item.className = 'supplement-item';
+  item.innerHTML = `
+    <div class="item-header">
+      <span class="item-number">Supplement ${supplementCount}</span>
+      ${supplementCount > 1 ? '<button type="button" class="remove-btn" onclick="this.parentElement.parentElement.remove()">Remove</button>' : ''}
+    </div>
+    <div class="item-row">
+      <input type="text" class="form-input" placeholder="Supplement name" data-supp-field="name" required>
+      <input type="text" class="form-input" placeholder="Brand (optional)" data-supp-field="brand">
+    </div>
+    <div class="item-row">
+      <input type="text" class="form-input" placeholder="Dose (e.g., 300mg)" data-supp-field="dose" required>
+      <input type="text" class="form-input" placeholder="Frequency (e.g., once daily)" data-supp-field="frequency" required>
+    </div>
+  `;
+  list.appendChild(item);
+  supplementCount++;
+}
+
+function addProduct(type){
+  const list = document.getElementById(`${type}ProductList`);
+  const count = type === 'am' ? amProductCount++ : pmProductCount++;
+  const item = document.createElement('div');
+  item.className = 'product-item';
+  item.innerHTML = `
+    <div class="item-header">
+      <span class="item-number">${type.toUpperCase()} Product ${count}</span>
+      ${count > 1 ? '<button type="button" class="remove-btn" onclick="this.parentElement.parentElement.remove()">Remove</button>' : ''}
+    </div>
+    <div class="item-row full">
+      <input type="text" class="form-input" placeholder="Product name & brand" data-product-field="name" data-product-type="${type}" required>
+    </div>
+    <div class="item-row full">
+      <textarea class="form-input" placeholder="Key ingredients (if known)" data-product-field="ingredients" data-product-type="${type}" style="min-height:60px;padding-top:0.75rem"></textarea>
+    </div>
+  `;
+  list.appendChild(item);
+}
+
+function buildReview(){
+  const reviewContent = document.getElementById('reviewContent');
+  let html = '';
+
+  // Personal Info
+  html += '<div class="review-section"><h3>Personal Information</h3>';
+  html += `<div class="review-item"><span class="review-label">Name</span><span class="review-value">${document.getElementById('name').value}</span></div>`;
+  html += `<div class="review-item"><span class="review-label">Email</span><span class="review-value">${document.getElementById('email').value}</span></div>`;
+  html += `<div class="review-item"><span class="review-label">Age</span><span class="review-value">${document.getElementById('age').value}</span></div>`;
+  html += `<div class="review-item"><span class="review-label">Sex</span><span class="review-value">${document.querySelector('input[name="sex"]:checked').value}</span></div>`;
+  html += '</div>';
+
+  // Audit Type
+  html += '<div class="review-section"><h3>Audit Type</h3>';
+  html += `<div class="review-item"><span class="review-label">Selected</span><span class="review-value">${document.querySelector('input[name="audit-type"]:checked').value}</span></div>`;
+  html += '</div>';
+
+  const auditType = document.querySelector('input[name="audit-type"]:checked').value;
+
+  // Supplements
+  if(auditType.includes('Supplement') || auditType.includes('Both')){
+    html += '<div class="review-section"><h3>Supplements</h3><div class="review-list">';
+    const suppItems = document.querySelectorAll('.supplement-item');
+    suppItems.forEach(item=>{
+      const name = item.querySelector('[data-supp-field="name"]').value;
+      const dose = item.querySelector('[data-supp-field="dose"]').value;
+      const freq = item.querySelector('[data-supp-field="frequency"]').value;
+      if(name) html += `<div class="review-list-item"><strong>${name}</strong> — ${dose}, ${freq}</div>`;
+    });
+    html += '</div>';
+    const meds = document.getElementById('medications').value;
+    if(meds) html += `<div class="review-item" style="margin-top:1rem;border-top:1px solid var(--border-light);padding-top:1rem"><span class="review-label">Medications</span><span class="review-value">${meds.substring(0,50)}${meds.length>50?'...':''}</span></div>`;
+    html += '</div>';
+  }
+
+  // Skincare
+  if(auditType.includes('Skincare') || auditType.includes('Both')){
+    html += '<div class="review-section"><h3>Skincare Routine</h3>';
+    html += '<div class="review-list">';
+    const amProducts = document.querySelectorAll('[data-product-type="am"]');
+    const pmProducts = document.querySelectorAll('[data-product-type="pm"]');
+    let amCount = 0, pmCount = 0;
+    amProducts.forEach(p=>{ if(p.value) amCount++; });
+    pmProducts.forEach(p=>{ if(p.value) pmCount++; });
+    html += `<div class="review-list-item"><strong>AM Routine:</strong> ${amCount/2} products</div>`;
+    html += `<div class="review-list-item"><strong>PM Routine:</strong> ${pmCount/2} products</div>`;
+    const skinType = document.getElementById('skin-type').value;
+    if(skinType) html += `<div class="review-list-item"><strong>Skin Type:</strong> ${skinType}</div>`;
+    html += '</div></div>';
+  }
+
+  reviewContent.innerHTML = html;
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+
+  // Serialize supplement data
+  const supplements = [];
+  document.querySelectorAll('.supplement-item').forEach(item=>{
+    const name = item.querySelector('[data-supp-field="name"]')?.value;
+    if(name){
+      supplements.push({
+        name: name,
+        brand: item.querySelector('[data-supp-field="brand"]')?.value || '',
+        dose: item.querySelector('[data-supp-field="dose"]')?.value || '',
+        frequency: item.querySelector('[data-supp-field="frequency"]')?.value || ''
+      });
+    }
+  });
+  document.getElementById('supplementsData').value = JSON.stringify(supplements);
+
+  // Serialize skincare data
+  const skincare = {am:[],pm:[]};
+  document.querySelectorAll('[data-product-field="name"]').forEach(input=>{
+    if(input.value){
+      const type = input.dataset.productType;
+      const parent = input.closest('.product-item');
+      skincare[type].push({
+        name: input.value,
+        ingredients: parent.querySelector('[data-product-field="ingredients"]')?.value || ''
+      });
+    }
+  });
+  document.getElementById('skincareData').value = JSON.stringify(skincare);
+
+  // Submit to Netlify
+  const formData = new FormData(e.target);
+  fetch('/',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams(formData).toString()
+  }).then(()=>{
+    document.getElementById('intakeForm').style.display = 'none';
+    document.querySelector('.progress-container').style.display = 'none';
+    document.getElementById('successState').classList.add('active');
+  }).catch(()=>{
+    alert('There was an error submitting your form. Please try again or email hello@vettedhealth.com');
+  });
+
+  return false;
+}
+</script>
+
+</body>
+</html>

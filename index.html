@@ -200,6 +200,65 @@ footer a:hover{text-decoration-color:var(--text)}
   .trust-bar{flex-direction:column;gap:0.75rem}
 }
 
+/* ── Sample Audit ── */
+.sample-audit{padding:8rem 0;background:var(--bg-alt);border-bottom:1px solid var(--border)}
+.audit-preview{max-width:780px;margin:0 auto;background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 2px 40px rgba(0,0,0,0.08);position:relative}
+.audit-header{background:var(--cream);padding:2rem 2.5rem;border-bottom:1px solid var(--border)}
+.audit-meta{display:flex;justify-content:space-between;margin-bottom:1rem;font-size:0.65rem;font-weight:500;color:var(--text-light);text-transform:uppercase;letter-spacing:0.08em}
+.audit-header h3{font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem}
+.audit-reviewer{font-size:0.75rem;color:var(--text);font-weight:400}
+.audit-body{padding:2.5rem;max-height:600px;overflow:hidden;position:relative}
+.audit-section{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border-light)}
+.audit-section:last-child{border-bottom:none;margin-bottom:0}
+.audit-section h4{font-family:'Inter',sans-serif;font-size:0.8rem;font-weight:600;color:var(--charcoal);margin-bottom:1.25rem;letter-spacing:0.02em}
+.audit-finding{margin-top:1.25rem;padding:1.25rem;background:var(--bg-alt);border-left:3px solid var(--sage);border-radius:4px}
+.audit-finding strong{display:block;font-size:0.85rem;color:var(--charcoal);margin-bottom:0.75rem;font-weight:500}
+.audit-finding p{font-size:0.8rem;color:var(--text);line-height:1.8;margin-bottom:0.75rem;font-weight:300}
+.audit-finding p:last-child{margin-bottom:0}
+.risk-badge{display:inline-block;background:var(--sage);color:var(--white);font-size:0.65rem;padding:0.25rem 0.75rem;border-radius:100px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.5rem}
+.audit-item{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border-light)}
+.audit-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.item-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem}
+.item-name{font-size:0.85rem;font-weight:500;color:var(--charcoal);flex:1}
+.item-status{font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:0.3rem 0.75rem;border-radius:100px;white-space:nowrap}
+.item-status.keep{background:rgba(139,154,141,0.1);color:var(--sage-dark)}
+.item-status.reduce{background:rgba(217,119,6,0.1);color:#d97706}
+.item-status.modify{background:rgba(59,130,246,0.1);color:#3b82f6}
+.audit-item p{font-size:0.8rem;color:var(--text);line-height:1.8;font-weight:300}
+.audit-item strong{color:var(--charcoal);font-weight:500}
+.physician-note{background:var(--cream);padding:1.75rem;border-radius:6px;border-left:3px solid var(--charcoal)}
+.physician-note h4{margin-bottom:1rem}
+.physician-note p{font-size:0.8rem;color:var(--text);line-height:1.8;margin-bottom:0.75rem;font-weight:300}
+.physician-note p:last-child{margin-bottom:0}
+.audit-fade{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0.97) 50%,var(--white) 100%);pointer-events:none}
+.audit-cta{text-align:center;padding:2.5rem 2rem 2rem;background:var(--white);position:relative;z-index:2}
+.audit-cta .btn{font-size:0.85rem;padding:1rem 2.5rem}
+.audit-cta-note{margin-top:1rem;font-size:0.7rem;color:var(--text-light);font-weight:400}
+
+/* ── Case Studies ── */
+.case-studies{padding:8rem 0;border-bottom:1px solid var(--border)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.case-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:2rem;transition:all 0.3s}
+.case-card:hover{border-color:var(--sage);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.case-header{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border-light)}
+.case-header h3{font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.5rem;letter-spacing:0.01em}
+.case-profile{font-size:0.7rem;color:var(--text-light);font-weight:400;letter-spacing:0.02em}
+.case-findings{margin-bottom:1.5rem}
+.case-findings p{font-size:0.75rem;font-weight:500;color:var(--charcoal);margin-bottom:0.75rem}
+.case-findings ul{list-style:none;margin:0;padding:0}
+.case-findings li{font-size:0.75rem;color:var(--text);padding:0.4rem 0;padding-left:1.25rem;position:relative;line-height:1.7;font-weight:300}
+.case-findings li::before{content:"•";position:absolute;left:0;color:var(--sage);font-weight:700}
+.case-result{font-size:0.8rem;color:var(--text);line-height:1.8;font-weight:300}
+.case-result strong{color:var(--charcoal);font-weight:500}
+.case-result .highlight{color:var(--sage-dark);font-weight:600}
+
+@media(max-width:768px){
+  .cases-grid{grid-template-columns:1fr}
+  .audit-body{padding:1.5rem;max-height:500px}
+  .audit-header{padding:1.5rem}
+  .audit-cta{padding:2rem 1.5rem 1.5rem}
+}
+
 /* ── Animations ── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(0.23,1,0.32,1),transform 0.7s cubic-bezier(0.23,1,0.32,1)}
 .reveal.visible{opacity:1;transform:none}
@@ -223,7 +282,7 @@ footer a:hover{text-decoration-color:var(--text)}
 <a href="#how" class="header-link">How It Works</a>
 <a href="#audits" class="header-link">Audits</a>
 <a href="#pricing" class="header-link">Pricing</a>
-<a href="#pricing" class="header-cta">Get Your Audit</a>
+<a href="intake.html" class="header-cta">Get Your Audit</a>
 </nav>
 </div>
 </header>
@@ -235,7 +294,7 @@ footer a:hover{text-decoration-color:var(--text)}
 <h1 class="reveal">Your routine, <em>reviewed by a physician.</em></h1>
 <p class="reveal reveal-delay-1">A brand-agnostic, physician-reviewed audit of your supplement stack or skincare regimen. Delivered in 48 hours.</p>
 <div class="hero-ctas reveal reveal-delay-2">
-<a href="#pricing" class="btn-white">Get Your Audit — $97</a>
+<a href="intake.html" class="btn-white">Get Your Audit — $97</a>
 <a href="#how" class="btn-outline" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2)">How It Works</a>
 </div>
 <div class="trust-bar reveal reveal-delay-3">
@@ -294,7 +353,7 @@ footer a:hover{text-decoration-color:var(--text)}
 <li>Personalized keep / cut / add recommendations</li>
 <li>Plain-language physician report</li>
 </ul>
-<a href="#pricing" class="btn reveal">Get Supplement Audit — $97</a>
+<a href="intake.html" class="btn reveal">Get Supplement Audit — $97</a>
 <div class="vert-examples reveal">
 <h4>Common findings</h4>
 <div class="ex"><strong>10mg melatonin nightly</strong> — receptor downregulation. Evidence supports 0.3–1mg.</div>
@@ -321,7 +380,7 @@ footer a:hover{text-decoration-color:var(--text)}
 <li>Product swap recommendations at three price tiers</li>
 <li>Dermatologist sign-off with clear reasoning</li>
 </ul>
-<a href="#pricing" class="btn reveal">Get Skincare Audit — $97</a>
+<a href="intake.html" class="btn reveal">Get Skincare Audit — $97</a>
 <div class="vert-examples reveal">
 <h4>Common findings</h4>
 <div class="ex"><strong>Physical scrub + AHA + retinoid</strong> — barrier destruction.</div>
@@ -332,6 +391,77 @@ footer a:hover{text-decoration-color:var(--text)}
 </div>
 
 </div>
+
+<!-- Sample Audit Preview -->
+<section class="sample-audit" id="sample">
+<div class="container">
+<div class="section-label reveal" style="text-align:center">See What You're Paying For</div>
+<h2 class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem">A real physician report. Not a product pitch.</h2>
+<p class="section-sub reveal" style="text-align:center;max-width:500px;margin:0 auto 3rem">This is an abbreviated sample from an actual supplement audit. Every audit includes drug-interaction checks, form optimization, and physician-signed recommendations.</p>
+<div class="audit-preview reveal">
+<div class="audit-header">
+<div class="audit-meta">
+<span class="audit-id">AUDIT ID: SUPP-SAMPLE-001</span>
+<span class="audit-date">February 2026</span>
+</div>
+<h3>Supplement Stack Audit</h3>
+<div class="audit-reviewer">Reviewed by: Family Medicine MD</div>
+</div>
+<div class="audit-body">
+<div class="audit-section">
+<h4>⚠️ Interaction Review — Read First</h4>
+<div class="audit-finding">
+<strong>FLAG 1: Ashwagandha + Escitalopram (Lexapro 10mg)</strong>
+<p><span class="risk-badge">Risk Level: Moderate</span></p>
+<p>Ashwagandha has documented effects on HPA axis regulation and emerging evidence of serotonin pathway involvement. The KSM-66 extract (300mg daily) works via GABA-A receptor modulation — different mechanism than SSRIs — but theoretical interaction exists.</p>
+<p><strong>Required action:</strong> Disclose this combination to prescribing physician at next visit. Do not increase dose above 600mg/day without physician knowledge.</p>
+</div>
+</div>
+<div class="audit-section">
+<h4>✅ Supplement-by-Supplement Review</h4>
+<div class="audit-item">
+<div class="item-header">
+<span class="item-name">Magnesium Glycinate (400mg elemental, PM)</span>
+<span class="item-status keep">KEEP</span>
+</div>
+<p>One of the cleanest choices in your stack. Magnesium glycinate has high bioavailability (~80%), minimal GI side effects, and the glycine component itself has evidence for sleep quality improvement. Form is correct. Timing is correct. No changes needed.</p>
+</div>
+<div class="audit-item">
+<div class="item-header">
+<span class="item-name">Melatonin (10mg gummy, nightly)</span>
+<span class="item-status reduce">REDUCE DOSE</span>
+</div>
+<p><strong>This is the most important change for sleep.</strong> The endogenous melatonin surge is achieved through 0.3–1mg supplementation. Your 10mg dose produces supraphysiologic blood concentrations 10–30x normal, causing receptor downregulation and may be contributing to your 3am waking.</p>
+<p><strong>Required action:</strong> Taper to 0.5–1mg over 2 weeks. This single correction is likely highest-impact for sleep quality.</p>
+</div>
+<div class="audit-item">
+<div class="item-header">
+<span class="item-name">Zinc Picolinate (30mg) — Missing Copper</span>
+<span class="item-status modify">ADD COPPER</span>
+</div>
+<p>Well-absorbed form at appropriate dose, but zinc and copper compete for absorption. Sustained 30mg zinc without copper causes deficiency over 6–12 months. Add copper glycinate 1–2mg daily.</p>
+</div>
+</div>
+<div class="audit-section">
+<h4>💰 Stack Optimization Summary</h4>
+<p><strong>Current monthly spend: ~$180</strong><br>
+<strong>Optimized stack: ~$145–165</strong><br>
+Primary value: Safety + efficacy optimization, not just cost reduction.</p>
+</div>
+<div class="audit-section physician-note">
+<h4>🩺 Physician Notes</h4>
+<p>Your overall approach is thoughtful — you've made good choices on form. The most important thing to address immediately is the melatonin dose. 10mg nightly is almost certainly contributing to your 3am waking. Please taper down to 0.5–1mg. In my clinical experience, this single change often resolves the second-half-of-night awakening pattern.</p>
+<p>The Ashwagandha + Lexapro combination: no absolute contraindication at your dose, but your prescribing physician should be aware...</p>
+</div>
+</div>
+<div class="audit-fade"></div>
+<div class="audit-cta">
+<a href="intake.html" class="btn">See Your Full Audit — $97</a>
+<p class="audit-cta-note">48-hour turnaround · Physician-signed · HIPAA-compliant</p>
+</div>
+</div>
+</div>
+</section>
 
 <!-- Pricing -->
 <section class="pricing" id="pricing">
@@ -344,20 +474,20 @@ footer a:hover{text-decoration-color:var(--text)}
 <h3>Supplement Audit</h3>
 <div class="price-amount">$97</div>
 <p class="price-detail">Full stack review by a licensed family medicine physician</p>
-<a href="#get-started" class="btn-outline">Get Started</a>
+<a href="intake.html" class="btn-outline">Get Started</a>
 </div>
 <div class="price-card featured reveal reveal-delay-2">
 <h3>Both Audits</h3>
 <div class="price-amount">$149</div>
 <div class="price-save">Save $45</div>
 <p class="price-detail">Supplements + skincare reviewed by both physicians</p>
-<a href="#get-started" class="btn">Get Both</a>
+<a href="intake.html" class="btn">Get Both</a>
 </div>
 <div class="price-card reveal reveal-delay-3">
 <h3>Skincare Audit</h3>
 <div class="price-amount">$97</div>
 <p class="price-detail">Full routine review by a board-certified dermatologist</p>
-<a href="#get-started" class="btn-outline">Get Started</a>
+<a href="intake.html" class="btn-outline">Get Started</a>
 </div>
 </div>
 <p class="sub-note reveal"><strong>Quarterly re-audits — $39/month.</strong> A physician reviews your updated routine every 3 months. Cancel anytime.</p>
@@ -387,6 +517,69 @@ footer a:hover{text-decoration-color:var(--text)}
 <div class="result">
 <div class="result-num">16 → 8</div>
 <div class="result-label">average skincare routine<br>simplification</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Case Studies -->
+<section class="case-studies">
+<div class="container">
+<div class="section-label reveal" style="text-align:center">Real Audits, Real Results</div>
+<h2 class="reveal" style="text-align:center">What our physicians find.</h2>
+<div class="cases-grid">
+<div class="case-card reveal reveal-delay-1">
+<div class="case-header">
+<h3>The Overloaded Biohacker</h3>
+<div class="case-profile">28M · 14 supplements · No prescriptions</div>
+</div>
+<div class="case-findings">
+<p><strong>Key findings:</strong></p>
+<ul>
+<li>5 products were redundant (3 contained overlapping B-vitamins)</li>
+<li>Magnesium oxide swapped to glycinate (4% → 80% absorption)</li>
+<li>Melatonin reduced from 10mg to 0.5mg</li>
+<li>Zinc flagged for copper depletion risk at 50mg/day</li>
+</ul>
+</div>
+<div class="case-result">
+<strong>Result:</strong> Stack reduced from 14 → 8 products. Estimated monthly savings: <span class="highlight">$85</span>
+</div>
+</div>
+<div class="case-card reveal reveal-delay-2">
+<div class="case-header">
+<h3>The Anxious Stacker</h3>
+<div class="case-profile">34F · 7 supplements · Currently on Lexapro (SSRI)</div>
+</div>
+<div class="case-findings">
+<p><strong>Key findings:</strong></p>
+<ul>
+<li>St. John's Wort immediately flagged — serotonin syndrome risk with SSRI</li>
+<li>Ashwagandha flagged for potential thyroid interaction (family history)</li>
+<li>5-HTP flagged — same serotonin pathway concern</li>
+</ul>
+</div>
+<div class="case-result">
+<strong>Result:</strong> <span class="highlight">3 dangerous interactions caught.</span> Physician recommended immediate discontinuation + PCP follow-up.
+</div>
+</div>
+<div class="case-card reveal reveal-delay-3">
+<div class="case-header">
+<h3>The Skincare Maximalist</h3>
+<div class="case-profile">31F · 9-product AM routine · 7-product PM routine</div>
+</div>
+<div class="case-findings">
+<p><strong>Key findings:</strong></p>
+<ul>
+<li>Vitamin C + retinol in same PM routine (reduced efficacy + irritation)</li>
+<li>AHA toner + physical scrub + retinol = triple exfoliation causing barrier damage</li>
+<li>No SPF despite 3 photosensitizing actives</li>
+<li>4 products contained overlapping humectants</li>
+</ul>
+</div>
+<div class="case-result">
+<strong>Result:</strong> Routine simplified from 16 → 8 products. Proper AM/PM separation. <span class="highlight">Skin improved within 3 weeks.</span>
+</div>
 </div>
 </div>
 </div>
@@ -429,7 +622,7 @@ footer a:hover{text-decoration-color:var(--text)}
 <h2 class="reveal">Let a physician check your work.</h2>
 <p class="reveal">$97 per audit. $149 for both. No products sold. No algorithm pretending to be a doctor.</p>
 <div class="final-ctas reveal">
-<a href="#get-started" class="btn-white">Get Your Audit</a>
+<a href="intake.html" class="btn-white">Get Your Audit</a>
 </div>
 </div>
 </section>
