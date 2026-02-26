@@ -1,0 +1,28 @@
+functionsDirectory = "/Users/ra/.openclaw/workspace/vetted-site/netlify/functions"
+functionsDirectoryOrigin = "default"
+plugins = []
+headers = []
+redirects = []
+
+[build]
+publish = "/Users/ra/.openclaw/workspace/vetted-site"
+publishOrigin = "ui"
+functions = "/Users/ra/.openclaw/workspace/vetted-site/netlify/functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]

@@ -687,5 +687,12 @@ const obs=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
+<!-- Netlify Form detection (hidden) -->
+<form name="intake" data-netlify="true" netlify-honeypot="bot-field" hidden>
+<input name="bot-field"><input name="form-name" value="intake">
+<input name="name"><input name="email"><input name="age"><input name="sex">
+<input name="audit-type"><input name="supplements-data"><input name="skincare-data">
+<input name="medications"><input name="health-goals"><input name="conditions"><input name="skin-type">
+</form>
 </body>
 </html>
