@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Vetted</title>
+<meta name="description" content="Evidence-based guides on supplement safety, skincare efficacy, and wellness optimization from physician-backed experts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#FAFAF8;
+  --bg-alt:#F4F3F0;
+  --charcoal:#1D1D1F;
+  --text:#6B6B6B;
+  --text-light:#999;
+  --sage:#8B9A8D;
+  --sage-dark:#6B7D6E;
+  --black:#111;
+  --white:#fff;
+  --cream:#F8F7F4;
+  --border:#E8E6E1;
+  --border-light:#F0EEEA;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.75;background:var(--bg);font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--charcoal);font-weight:400;line-height:1.2}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%}
+
+body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+
+.container{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+
+.header{position:fixed;top:0;width:100%;z-index:100;padding:0;background:rgba(250,250,248,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-light)}
+.header-inner{max-width:1080px;margin:0 auto;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--charcoal);font-weight:500;letter-spacing:-0.02em}
+.header-nav{display:flex;gap:2.5rem;align-items:center}
+.header-link{font-size:0.75rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-light);transition:color 0.2s}
+.header-link:hover{color:var(--charcoal)}
+.header-cta{background:var(--charcoal);color:var(--white);padding:0.55rem 1.5rem;border-radius:100px;font-size:0.75rem;font-weight:500;letter-spacing:0.04em;transition:all 0.3s}
+.header-cta:hover{background:var(--black)}
+
+.blog-hero{padding:10rem 0 5rem;text-align:center}
+.blog-hero h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem;letter-spacing:-0.03em}
+.blog-hero p{color:var(--text);font-size:1rem;max-width:520px;margin:0 auto;font-weight:300}
+
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:3rem;padding:5rem 0 8rem}
+.post-card{border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;background:var(--white)}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.08);border-color:var(--charcoal)}
+.post-img{height:240px;background:var(--bg-alt);position:relative;overflow:hidden}
+.post-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.post-card:hover .post-img img{transform:scale(1.05)}
+.post-content{padding:2rem}
+.post-meta{display:flex;gap:1rem;font-size:0.7rem;color:var(--text-light);margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:500}
+.post-card h3{font-size:1.4rem;margin-bottom:0.75rem;letter-spacing:-0.01em}
+.post-excerpt{color:var(--text);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;font-weight:300}
+.read-more{color:var(--sage-dark);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;display:inline-flex;align-items:center;gap:0.5rem;transition:gap 0.2s}
+.post-card:hover .read-more{gap:0.75rem}
+.read-more::after{content:'→'}
+
+.cta-section{background:var(--bg-alt);padding:5rem 0;text-align:center;border-top:1px solid var(--border)}
+.cta-section h2{font-size:clamp(1.75rem,3vw,2.5rem);margin-bottom:1rem}
+.cta-section p{color:var(--text);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;font-weight:300}
+.btn{display:inline-block;background:var(--charcoal);color:var(--white);padding:1rem 2.5rem;border-radius:100px;font-size:0.8rem;font-weight:500;letter-spacing:0.03em;transition:all 0.3s}
+.btn:hover{background:var(--black);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+
+.footer{background:var(--charcoal);color:rgba(255,255,255,0.6);padding:3rem 0;text-align:center}
+.footer-inner{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+.footer p{font-size:0.75rem;font-weight:300}
+.footer a{color:rgba(255,255,255,0.8);transition:color 0.2s}
+.footer a:hover{color:var(--white)}
+
+@media(max-width:768px){
+  .blog-grid{grid-template-columns:1fr;gap:2rem}
+  .header-nav{gap:1.5rem}
+  .header-link{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">Vetted</a>
+    <nav class="header-nav">
+      <a href="/#how" class="header-link">How It Works</a>
+      <a href="/blog" class="header-link">Blog</a>
+      <a href="/intake.html" class="header-cta">Get Your Audit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="blog-hero">
+  <div class="container">
+    <h1>Evidence-Based Wellness</h1>
+    <p>Physician-backed guides on supplement safety, skincare efficacy, and optimization strategies that actually work.</p>
+  </div>
+</section>
+
+<section class="blog-grid container">
+  
+  <!-- Post 1: Supplement Interactions -->
+  <article class="post-card">
+    <a href="/blog/posts/dangerous-supplement-interactions.html">
+      <div class="post-img">
+        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80&auto=format&fit=crop" alt="Supplements and pills">
+      </div>
+      <div class="post-content">
+        <div class="post-meta">
+          <span>Mar 22, 2026</span>
+          <span>5 min read</span>
+        </div>
+        <h3>The 15 Most Dangerous Supplement Interactions</h3>
+        <p class="post-excerpt">Many "healthy" supplement combinations can be risky. Here's what physicians want you to know about common interactions that could harm you.</p>
+        <span class="read-more">Read Article</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- Placeholder posts - replace with real content -->
+  <article class="post-card">
+    <a href="#">
+      <div class="post-img">
+        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&q=80&auto=format&fit=crop" alt="Ashwagandha">
+      </div>
+      <div class="post-content">
+        <div class="post-meta">
+          <span>Coming Soon</span>
+          <span>6 min read</span>
+        </div>
+        <h3>Ashwagandha Side Effects: What Physicians Want You to Know</h3>
+        <p class="post-excerpt">Ashwagandha is trending, but is it safe for everyone? We break down the research and physician concerns.</p>
+        <span class="read-more">Read Article</span>
+      </div>
+    </a>
+  </article>
+
+  <article class="post-card">
+    <a href="#">
+      <div class="post-img">
+        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=800&q=80&auto=format&fit=crop" alt="Skincare products">
+      </div>
+      <div class="post-content">
+        <div class="post-meta">
+          <span>Coming Soon</span>
+          <span>7 min read</span>
+        </div>
+        <h3>Can You Use Retinol and Vitamin C Together?</h3>
+        <p class="post-excerpt">The internet says both yes and no. Here's what dermatologists actually recommend based on the science.</p>
+        <span class="read-more">Read Article</span>
+      </div>
+    </a>
+  </article>
+
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Not sure if your stack is safe?</h2>
+    <p>Get a physician-backed audit of your supplements or skincare routine. Results in 48 hours.</p>
+    <a href="/intake.html" class="btn">Get Your Audit — $97</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p>&copy; 2026 Vetted Health. <a href="mailto:vettedhealth@proton.me">Contact</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
